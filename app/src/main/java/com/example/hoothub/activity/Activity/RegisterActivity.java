@@ -10,17 +10,19 @@ import android.widget.TextView;
 
 import com.example.hoothub.R;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView btn_register;
-    private Button btn_login;
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private TextView btn_login;
+    private Button btn_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
-        btn_login = findViewById(R.id.btnLogin);
-        btn_register = findViewById(R.id.txtRegister);
+        btn_register = findViewById(R.id.btnSignUp);
+        btn_login = findViewById(R.id.txtLogin);
+
         btn_login.setOnClickListener(this);
         btn_register.setOnClickListener(this);
     }
@@ -28,13 +30,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         Intent intent;
-        if (v.getId() == R.id.btnLogin) {
+        if (v.getId() == R.id.btnSignUp) {
             // Intent to start LoginActivity
             intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        } else if (v.getId() == R.id.txtRegister) {
+        } else if (v.getId() == R.id.txtLogin) {
             // Intent to start RegisterActivity
-            intent = new Intent(this, RegisterActivity.class);
+            intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
     }

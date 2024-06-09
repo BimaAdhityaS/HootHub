@@ -1,12 +1,13 @@
 *.iml
+.classpath
 .gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/misc.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
 .DS_Store
 /build
 /captures
@@ -27,6 +28,3 @@ gradle-app.setting
 # Eclipse Core
 .project
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
-.idea/misc.xml
-.idea/workspace.xml

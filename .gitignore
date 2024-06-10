@@ -1,6 +1,7 @@
 *.iml
 .classpath
 .gradle
+.idea
 .idea/caches
 .idea/libraries
 .idea/modules.xml

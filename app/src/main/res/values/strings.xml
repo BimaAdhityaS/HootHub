@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">HootHub</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_name">Ruchi Shah</string>
+    <string name="dummy_username">\@ruchi_shah10</string>
+    <string name="dummy_post_text">Kobe’s passing is really sticking w/ me in a way I didn’t expect.\n\ \n\He was an icon, the kind of person who wouldn’t die this way. My wife compared it to Princess Diana’s accident.</string>
+    <string name="comments_text">Comments</string>
+    <string name="dummy_comment_value">2</string>
+    <string name="dummy_like_value">2.8k</string>
+    <string name="likes_text">Likes</string>
 </resources>

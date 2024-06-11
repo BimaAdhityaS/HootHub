@@ -8,4 +8,10 @@
     <string name="dummy_comment_value">2</string>
     <string name="dummy_like_value">2.8k</string>
     <string name="likes_text">Likes</string>
+    <string name="dummy_name_2">James Howell</string>
+    <string name="comment_text_1">F to Pay Respect for Kobe Bryant</string>
+    <string name="likes_value_1">1k</string>
+    <string name="comment_text">Comments</string>
+    <string name="comment_value_1">1</string>
+    <string name="time_post_value">48m</string>
 </resources>

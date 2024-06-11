@@ -9,8 +9,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="UselessParent">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,8 +28,8 @@
                     android:id="@+id/profile_image"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/img_dummyprofilepic"
                     app:civ_border_color="#FF000000"
                     app:civ_border_width="0dp" />
@@ -150,19 +149,178 @@
                         android:textColor="@color/lightText"
                         android:textSize="14sp" />
                 </LinearLayout>
-
             </LinearLayout>
 
             <!-- Batas Postingan dan Komentar-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="8dp"
+                android:background="@color/lightText" />
+
+            <!-- Komentar-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:baselineAligned="false"
                 android:layout_margin="8dp">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/lightText" />
+                <!-- Foto Profile Layout-->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_2"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/img_dummyprofilepic"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="0dp"/>
+
+                <!-- Username, Komentar, Like dan Reply Layout-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <!-- Username dan Komentar -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Username -->
+                        <TextView
+                            android:id="@+id/name_comments"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="@string/dummy_name_2"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <!-- Teks Komentar -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="@string/comment_text_1"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <!-- Like dan Reply -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <!-- Like -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <!-- Like Button -->
+                                <ImageButton
+                                    android:id="@+id/likes_button"
+                                    android:layout_width="28dp"
+                                    android:layout_height="28dp"
+                                    android:background="@null"
+                                    android:drawablePadding="8dp"
+                                    android:paddingStart="16dp"
+                                    android:paddingEnd="16dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/img_liked"
+                                    android:contentDescription="Like Button" />
+                                <!-- Untuk Input-->
+                                <!-- android:onClick="onButtonClick"-->
+
+                                <!-- Like Value -->
+                                <TextView
+                                    android:id="@+id/likes_value_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/plus_jakarta_sans"
+                                    android:paddingStart="4dp"
+                                    android:paddingEnd="4dp"
+                                    android:paddingTop="4dp"
+                                    android:text="@string/likes_value_1"
+                                    android:textColor="@color/lightText"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <!-- Reply -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <!-- Reply Button -->
+                                <ImageButton
+                                    android:id="@+id/replies_button"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:paddingTop="2dp"
+                                    android:background="@null"
+                                    android:drawablePadding="8dp"
+                                    android:paddingStart="16dp"
+                                    android:paddingEnd="16dp"
+                                    android:scaleType="centerCrop"
+                                    android:contentDescription="Reply Button"
+                                    android:src="@drawable/img_comment" />
+                                <!-- Untuk Input-->
+                                <!-- android:onClick="onButtonClick"-->
+
+                                <!-- Reply Value -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/plus_jakarta_sans"
+                                    android:paddingStart="4dp"
+                                    android:paddingEnd="4dp"
+                                    android:paddingTop="4dp"
+                                    android:text="@string/comment_value_1"
+                                    android:textColor="@color/lightText"
+                                    android:textSize="12sp" />
+
+                                <!-- Reply Text -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/plus_jakarta_sans"
+                                    android:paddingStart="4dp"
+                                    android:paddingEnd="4dp"
+                                    android:paddingTop="4dp"
+                                    android:text="@string/comment_text"
+                                    android:textColor="@color/lightText"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Time Post Layout-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Time Post -->
+                    <TextView
+                        android:id="@+id/time_post_value_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/plus_jakarta_sans"
+                        android:paddingBottom="2dp"
+                        android:text="@string/time_post_value"
+                        android:textColor="@color/lightText"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -20,6 +20,11 @@
           <theme>@style/Theme.HootHub</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_post.xml">
+        <config>
+          <theme>@style/Theme.HootHub</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/bottom_navbar.xml">
         <config>
           <theme>@style/Theme.HootHub</theme>
@@ -31,15 +36,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46fcfdaf-c0ae-4169-bbbf-bd5b7d5c85c4" name="Changes" comment="pull">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/color/color_item_bottom_nav.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/main_activity_home_icon.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/main_activity_profile_icon.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/bottom_navbar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="46fcfdaf-c0ae-4169-bbbf-bd5b7d5c85c4" name="Changes" comment="update main activity and refactor the directory">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/PostFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_post.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +65,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2hP6soCvfTmcDAPeSfZmvbouGtO" />
   <component name="ProjectViewState">
@@ -178,10 +182,20 @@
       <option name="presentableId" value="Default" />
       <updated>1717483574767</updated>
     </task>
+    <task id="LOCAL-00001" summary="update main activity and refactor the directory">
+      <option name="closed" value="true" />
+      <created>1717619312481</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717619312481</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pull" />
-    <option name="LAST_COMMIT_MESSAGE" value="pull" />
+    <MESSAGE value="update main activity and refactor the directory" />
+    <option name="LAST_COMMIT_MESSAGE" value="update main activity and refactor the directory" />
   </component>
 </project>

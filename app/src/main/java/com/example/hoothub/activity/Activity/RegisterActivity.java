@@ -2,13 +2,16 @@ package com.example.hoothub.activity.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hoothub.R;
 import com.example.hoothub.model.user;
@@ -25,6 +28,7 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
+    SharedPreferences sp;
     private TextView btn_login;
     private Button btn_register;
 
@@ -45,6 +49,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         et_email = (EditText) findViewById(R.id.input_signupEmail);
         et_password = (EditText) findViewById(R.id.input_signupPassword);
         et_confirmpassword = (EditText) findViewById(R.id.input_signupConfirmPassword);
+
+        sp = getSharedPreferences("userCred", Context.MODE_PRIVATE);
     }
 
     @Override
@@ -55,7 +61,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.btnSignUp) {
-            btnCreateUserClicked();
+            String password = et_password.getText().toString();
+            String confirmPassword = et_confirmpassword.getText().toString();
+            String email = et_email.getText().toString();
+            String username = et_username.getText().toString();
+
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                Toast.makeText(RegisterActivity.this, "You must fill all the input fields", Toast.LENGTH_SHORT).show();
+            } else if (password.equals(confirmPassword)) {
+                btnCreateUserClicked();
+            } else {
+                Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -74,6 +91,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
                     user createdUser = response.body().get(0); // Get the first user
                     Log.d("RegisterActivity", "User created successfully: " + response.body());
+                    Log.d("RegisterActivity", "User ID: " + createdUser.getId());
+
+                    //simpan user_id yang kebuat ke sharedpreference
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("user_id", createdUser.getId());
+                    editor.apply();
+
+                    // Intent to start RegisterActivity
+                    Intent intent;
+                    intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
                 } else {
                     Log.e("RegisterActivity", "Failed to create user: " + response.errorBody());
                 }

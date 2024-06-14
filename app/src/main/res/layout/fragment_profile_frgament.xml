@@ -1,0 +1,790 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Profile Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Profile Picture -->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_picture"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="start|top"
+                    android:src="@drawable/bobby_image"
+                    android:scaleType="centerCrop"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="16dp"
+                    app:civ_border_width="0dp"
+                    app:civ_border_color="#FF000000"/>
+
+                <!-- Edit Profile Button -->
+                <Button
+                    android:id="@+id/edit_profile_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Profile"
+                    android:layout_gravity="end|top"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/button_outline_blue"
+                    android:textColor="@color/floatingButton"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
+
+                <Button
+                    android:id="@+id/sign_out_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Out"
+                    android:layout_gravity="end|top"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/button_outline_red"
+                    android:textColor="@color/brightRed"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
+
+
+            </LinearLayout>
+
+            <!-- First Name Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- First Name and Last Name -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="start|center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <!-- Text View for First Name -->
+                    <TextView
+                        android:id="@+id/first_name_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bobby"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="8dp"/>
+
+                    <!-- Text View for Last Name -->
+                    <TextView
+                        android:id="@+id/last_name_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rafael"
+                        android:textColor="@android:color/black"
+                        android:layout_marginStart="16dp"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+
+                <!-- Text View for Last Name -->
+                <TextView
+                    android:id="@+id/username_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BobbyRafael"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:layout_marginStart="16dp"/>
+
+                <!-- Bio Text View -->
+                <TextView
+                    android:id="@+id/bio_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nocturnix Team - Web and Game development; Graphics; Illustrations"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:layout_marginStart="16dp"/>
+
+            </LinearLayout>
+
+            <!-- Your Threads Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:orientation="horizontal">
+
+                    <!-- Profile Picture -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/user_profile_image4"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/bobby_image"
+                            app:civ_border_color="#FF000000"
+                            app:civ_border_width="0dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <!-- Username and Comment Text-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!--Comment-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="BobbyRafael"
+                            android:textColor="@color/black"
+                            android:textFontWeight="800"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="Yang bener aja..."
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="Rugi dong"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/likedButton4"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:background="@null"
+                                android:drawablePadding="8dp"
+                                android:onClick="onButtonClick"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/liked_img" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/plus_jakarta_sans"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="4dp"
+                                android:text="100"
+                                android:textColor="@color/lightText"
+                                android:textSize="12dp" />
+
+                            <ImageButton
+                                android:id="@+id/commentButton4"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginLeft="8dp"
+                                android:paddingTop="2dp"
+                                android:background="@null"
+                                android:drawablePadding="8dp"
+                                android:onClick="onButtonClick"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/comment_img" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/plus_jakarta_sans"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="4dp"
+                                android:text="10 comments"
+                                android:textColor="@color/lightText"
+                                android:textSize="12dp" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Time Post -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="4 January 2024 8:00 PM"
+                            android:textColor="@color/lightText"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!-- Light Border-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightText" />
+            </LinearLayout>
+
+            <!-- Your Threads Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:orientation="horizontal">
+
+                    <!-- Profile Picture -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/user_profile_image4"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/bobby_image"
+                            app:civ_border_color="#FF000000"
+                            app:civ_border_width="0dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <!-- Username and Comment Text-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!--Comment-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="BobbyRafael"
+                            android:textColor="@color/black"
+                            android:textFontWeight="800"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="Bang cara install Unity gimana yak?"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/likedButton4"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:background="@null"
+                                android:drawablePadding="8dp"
+                                android:onClick="onButtonClick"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/liked_img" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/plus_jakarta_sans"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="4dp"
+                                android:text="90"
+                                android:textColor="@color/lightText"
+                                android:textSize="12dp" />
+
+                            <ImageButton
+                                android:id="@+id/commentButton4"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginLeft="8dp"
+                                android:paddingTop="2dp"
+                                android:background="@null"
+                                android:drawablePadding="8dp"
+                                android:onClick="onButtonClick"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/comment_img" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/plus_jakarta_sans"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="4dp"
+                                android:text="15 comments"
+                                android:textColor="@color/lightText"
+                                android:textSize="12dp" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Time Post -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="4 January 2024 8:00 PM"
+                            android:textColor="@color/lightText"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!-- Light Border-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightText" />
+            </LinearLayout>
+
+            <!-- Your Threads Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:orientation="horizontal">
+
+                    <!-- Profile Picture -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/user_profile_image4"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/bobby_image"
+                            app:civ_border_color="#FF000000"
+                            app:civ_border_width="0dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <!-- Username and Comment Text-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!--Comment-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="BobbyRafael"
+                            android:textColor="@color/black"
+                            android:textFontWeight="800"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="Bang cara install Android Studio gimana yak?"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/likedButton4"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:background="@null"
+                                android:drawablePadding="8dp"
+                                android:onClick="onButtonClick"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/liked_img" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/plus_jakarta_sans"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="4dp"
+                                android:text="90"
+                                android:textColor="@color/lightText"
+                                android:textSize="12dp" />
+
+                            <ImageButton
+                                android:id="@+id/commentButton4"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginLeft="8dp"
+                                android:paddingTop="2dp"
+                                android:background="@null"
+                                android:drawablePadding="8dp"
+                                android:onClick="onButtonClick"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/comment_img" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/plus_jakarta_sans"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="4dp"
+                                android:text="15 comments"
+                                android:textColor="@color/lightText"
+                                android:textSize="12dp" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Time Post -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="4 January 2024 8:00 PM"
+                            android:textColor="@color/lightText"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!-- Light Border-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightText" />
+            </LinearLayout>
+
+            <!-- Your Threads Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:orientation="horizontal">
+
+                    <!-- Profile Picture -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/user_profile_image4"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/bobby_image"
+                            app:civ_border_color="#FF000000"
+                            app:civ_border_width="0dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <!-- Username and Comment Text-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!--Comment-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="BobbyRafael"
+                            android:textColor="@color/black"
+                            android:textFontWeight="800"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="Bang cara install Visual Studio gimana yak?"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/likedButton4"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:background="@null"
+                                android:drawablePadding="8dp"
+                                android:onClick="onButtonClick"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/liked_img" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/plus_jakarta_sans"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="4dp"
+                                android:text="90"
+                                android:textColor="@color/lightText"
+                                android:textSize="12dp" />
+
+                            <ImageButton
+                                android:id="@+id/commentButton4"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginLeft="8dp"
+                                android:paddingTop="2dp"
+                                android:background="@null"
+                                android:drawablePadding="8dp"
+                                android:onClick="onButtonClick"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/comment_img" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/plus_jakarta_sans"
+                                android:paddingLeft="4dp"
+                                android:paddingTop="4dp"
+                                android:text="15 comments"
+                                android:textColor="@color/lightText"
+                                android:textSize="12dp" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Time Post -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/plus_jakarta_sans"
+                            android:paddingBottom="2dp"
+                            android:text="4 January 2024 8:00 PM"
+                            android:textColor="@color/lightText"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!-- Light Border-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/lightText" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/floatingButton"
+        android:src="@drawable/add_thread_icon"
+        android:tint="@color/white" />
+
+</FrameLayout>

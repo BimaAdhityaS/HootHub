@@ -1,6 +1,20 @@
+*.iml
+.classpath
 .gradle
-**/build/
-!src/**/build/
+.idea
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/misc.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -15,4 +29,6 @@ gradle-app.setting
 # Eclipse Core
 .project
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
+.idea/workspace.xml
+.idea/misc.xml
+.idea/workspace.xml

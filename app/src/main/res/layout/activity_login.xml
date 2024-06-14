@@ -39,7 +39,7 @@
             android:fontFamily="@font/plus_jakarta_sans"/>
 
         <EditText
-            android:id="@+id/loginEmail"
+            android:id="@+id/input_loginEmail"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginTop="4dp"
@@ -65,7 +65,7 @@
             android:fontFamily="@font/plus_jakarta_sans"/>
 
         <EditText
-            android:id="@+id/loginPassword"
+            android:id="@+id/input_loginPassword"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginTop="4dp"

@@ -14,6 +14,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -28,9 +29,30 @@ public interface ApiInterface {
             @Field("password") String password,
             @Header("Prefer") String preferHeader);
 
+    //Create a User
+    @FormUrlEncoded
+    @PATCH("User")
+    Call<List<user>> updateUser(
+            @Query("id") String user_id,
+            @Field("first name") String first_name,
+            @Field("last name") String last_name,
+            @Field("username") String username,
+            @Field("bio") String bio);
+
     //GET Filtering User sebagai indikasi login (Kalau ada usernya berarti dia masuk)
     @GET("User")
     Call<List<user>> login(@Query("email") String email, @Query("password") String password, @Query("select") String select);
+
+    //GET Current User untuk profile
+    @GET("User")
+    Call<List<user>> getCurrentUser(@Query("id") String id, @Query("select") String select);
+
+    @GET("Hoothub_Post_1")
+    Call<List<post>> getCurrentUserPost(
+            @Query("user_id") String user_id,
+            @Query("select") String select
+    );
+
     @FormUrlEncoded
     @POST("Hoothub_Post_1")
     Call<List<post>> createPost(
@@ -39,6 +61,7 @@ public interface ApiInterface {
             @Field("username") String username,
             @Header("Prefer") String preferHeader
     );
+
     @GET("Hoothub_Post_1")
     Call<List<post>> getPosts();
 

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -208,7 +208,7 @@
                                 android:paddingStart="16dp"
                                 android:paddingEnd="16dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/liked_img" />
+                                android:src="@drawable/like_vektor" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -232,7 +232,7 @@
                                 android:paddingStart="16dp"
                                 android:paddingEnd="16dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/comment_img" />
+                                android:src="@drawable/img_comment" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -369,7 +369,7 @@
                                 android:paddingStart="16dp"
                                 android:paddingEnd="16dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/liked_img" />
+                                android:src="@drawable/like_vektor" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -393,7 +393,7 @@
                                 android:paddingStart="16dp"
                                 android:paddingEnd="16dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/comment_img" />
+                                android:src="@drawable/img_comment" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -529,7 +529,7 @@
                                 android:paddingStart="16dp"
                                 android:paddingEnd="16dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/liked_img" />
+                                android:src="@drawable/like_vektor" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -553,7 +553,7 @@
                                 android:paddingStart="16dp"
                                 android:paddingEnd="16dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/comment_img" />
+                                android:src="@drawable/img_comment" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -690,7 +690,7 @@
                                 android:paddingStart="16dp"
                                 android:paddingEnd="16dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/liked_img" />
+                                android:src="@drawable/like_vektor" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -714,7 +714,7 @@
                                 android:paddingStart="16dp"
                                 android:paddingEnd="16dp"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/comment_img" />
+                                android:src="@drawable/img_comment" />
 
                             <TextView
                                 android:layout_width="wrap_content"

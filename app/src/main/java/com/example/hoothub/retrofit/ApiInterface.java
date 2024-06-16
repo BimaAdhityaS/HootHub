@@ -2,6 +2,7 @@ package com.example.hoothub.retrofit;
 
 import android.database.Observable;
 
+import com.example.hoothub.model.post;
 import com.example.hoothub.model.user;
 
 import java.util.List;
@@ -29,4 +30,11 @@ public interface ApiInterface {
     //GET Filtering User sebagai indikasi login (Kalau ada usernya berarti dia masuk)
     @GET("User")
     Call<List<user>> login(@Query("email") String email, @Query("password") String password, @Query("select") String select);
+    @FormUrlEncoded
+    @POST("Hoothub_Post_1")
+    Call<List<post>> createPost(
+            @Field("content") String content,
+            @Field("user_id") String user_id,
+            @Header("Prefer") String preferHeader
+    );
 }

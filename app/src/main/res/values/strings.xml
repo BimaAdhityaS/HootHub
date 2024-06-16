@@ -14,4 +14,6 @@
     <string name="comment_text">Comments</string>
     <string name="comment_value_1">1</string>
     <string name="time_post_value">48m</string>
+    <string name="name">sample name</string>
+    <string name="postText">sample post text\n</string>
 </resources>

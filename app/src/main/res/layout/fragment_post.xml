@@ -3,13 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.Activity.PostFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_post"
+        />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|end"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="4dp"
+        android:clickable="true"
+        app:tint="#FFF"
+        android:src="@drawable/floating_button_new"
+        android:backgroundTint="@color/floatingButton"
+        app:shapeAppearanceOverlay="@style/fab_3_rounded"
         />
 
 </FrameLayout>

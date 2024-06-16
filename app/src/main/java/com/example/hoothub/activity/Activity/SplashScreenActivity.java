@@ -18,6 +18,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         SharedPreferences sp = getApplicationContext().getSharedPreferences("userCred", Context.MODE_PRIVATE);
         String user_id = sp.getString("user_id", "");
+        getSupportActionBar().hide();
 
         new Handler().postDelayed(() -> {
             Intent intent;

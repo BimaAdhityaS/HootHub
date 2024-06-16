@@ -90,7 +90,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         } else if (view.getId() == R.id.floatingActionButton) {
-            Intent intent = new Intent(getActivity(), AddPost.class);
+            Intent intent = new Intent(getActivity(), AddPostActivity.class);
             startActivity(intent);
         }
     }

@@ -80,4 +80,10 @@ public interface ApiInterface {
             @Field("content") String content,
             @Header("Prefer") String preferHeader
     );
+
+    @GET("Hoothub_Comment_2")
+    Call<List<comment>> getComment(
+            @Query("post_id") String post_id,
+            @Query("select") String select
+    );
 }

@@ -162,7 +162,7 @@
                 android:layout_margin="8dp"
                 android:background="@color/lightText" />
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvText"
+                android:id="@+id/rvComment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/item_post"

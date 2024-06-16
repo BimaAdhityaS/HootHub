@@ -1,5 +1,6 @@
 package com.example.hoothub.activity.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,17 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hoothub.R;
+import com.example.hoothub.adapter.ListCommentAdapter;
+import com.example.hoothub.model.comment;
 import com.example.hoothub.model.post;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,7 +36,10 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
     private int postId;
 
     private TextView tvTitle, tvUsername, tvUsername_2;
+    private RecyclerView rvComment;
     private FloatingActionButton floatingActionButton;
+    private ArrayList<comment> list = new ArrayList<>();
+    private ListCommentAdapter listCommentAdapter;
 
     public CommentFragment() {
         // Required empty public constructor
@@ -60,6 +70,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
         tvTitle = view.findViewById(R.id.et_Title);
         tvUsername = view.findViewById(R.id.et_username);
         tvUsername_2 = view.findViewById(R.id.et_username_2);
+        rvComment = view.findViewById(R.id.rvComment);  // Inisialisasi RecyclerView
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(this);
         return view;
@@ -68,7 +79,40 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        showRecylcerList(view.getContext());
         fetchPost();
+        fetchComment();
+    }
+
+    private void showRecylcerList(Context context) {
+        rvComment.setLayoutManager(new LinearLayoutManager(context));
+        listCommentAdapter = new ListCommentAdapter(context, list);
+        rvComment.setAdapter(listCommentAdapter);
+    }
+
+    private void fetchComment() {
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<comment>> call = apiInterface.getComment(
+                "eq." + postId,
+                "*"
+        );
+        call.enqueue(new Callback<List<comment>>() {
+            @Override
+            public void onResponse(Call<List<comment>> call, Response<List<comment>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    list.clear();
+                    list.addAll(response.body());
+                    listCommentAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(getContext(), "Failed to fetch comment", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<comment>> call, Throwable t) {
+                Toast.makeText(getContext(), "API call failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void fetchPost() {

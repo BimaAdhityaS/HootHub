@@ -23,6 +23,7 @@ import com.example.hoothub.model.post;
 import com.example.hoothub.model.user;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Button editBtn,signOutBtn;
     private TextView profileName, userName, bio;
 
+    private FloatingActionButton floatingActionButton;
+
     private RecyclerView rvText;
 
     private ArrayList<post> list = new ArrayList<>();
@@ -46,9 +49,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         editBtn = view.findViewById(R.id.edit_profile);
         editBtn.setOnClickListener(this);
+
         signOutBtn = view.findViewById(R.id.sign_out_profile);
         signOutBtn.setOnClickListener(this);
-        // Inflate the layout for this fragment
+
+        floatingActionButton = view.findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(this);
 
         rvText = view.findViewById(R.id.rvText);
         rvText.setHasFixedSize(true);
@@ -82,6 +88,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             editor.apply();
 
             Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        } else if (view.getId() == R.id.floatingActionButton) {
+            Intent intent = new Intent(getActivity(), AddPost.class);
             startActivity(intent);
         }
     }

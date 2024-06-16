@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         et_password = findViewById(R.id.input_loginPassword);
 
         sp = getSharedPreferences("userCred", Context.MODE_PRIVATE);
+        getSupportActionBar().hide();
     }
 
     @Override

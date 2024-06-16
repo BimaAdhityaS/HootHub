@@ -1,5 +1,6 @@
 package com.example.hoothub.activity.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.example.hoothub.R;
 import com.example.hoothub.model.post;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -22,11 +24,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CommentFragment extends Fragment {
+public class CommentFragment extends Fragment implements View.OnClickListener{
     private static final String ARG_POST_ID = "post_id";
     private int postId;
 
-    private TextView tvTitle;
+    private TextView tvTitle, tvUsername, tvUsername_2;
+    private FloatingActionButton floatingActionButton;
 
     public CommentFragment() {
         // Required empty public constructor
@@ -55,6 +58,10 @@ public class CommentFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_comment, container, false);
         tvTitle = view.findViewById(R.id.et_Title);
+        tvUsername = view.findViewById(R.id.et_username);
+        tvUsername_2 = view.findViewById(R.id.et_username_2);
+        floatingActionButton = view.findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(this);
         return view;
     }
 
@@ -72,8 +79,9 @@ public class CommentFragment extends Fragment {
             public void onResponse(Call<List<post>> call, Response<List<post>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     post post = response.body().get(0);
-                    // Pastikan post.getUser_name() adalah metode yang benar pada objek post
-                    tvTitle.setText(post.getUser_name());
+                    tvTitle.setText(post.getContent());
+                    tvUsername.setText(post.getUser_name());
+                    tvUsername_2.setText("@"+post.getUser_name());
                 } else {
                     Log.e("CommentFragment", "Failed to fetch post");
                 }
@@ -84,5 +92,14 @@ public class CommentFragment extends Fragment {
                 Log.e("CommentFragment", "Error fetching post: " + t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.floatingActionButton) {
+            Intent intent = new Intent(getActivity(), AddCommentActivity.class);
+            intent.putExtra("post_id", String.valueOf(postId));
+            startActivity(intent);
+        }
     }
 }

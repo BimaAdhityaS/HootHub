@@ -2,6 +2,7 @@ package com.example.hoothub.retrofit;
 
 import android.database.Observable;
 
+import com.example.hoothub.model.comment;
 import com.example.hoothub.model.post;
 import com.example.hoothub.model.user;
 
@@ -45,5 +46,15 @@ public interface ApiInterface {
     Call<List<post>> getContent(
             @Query("id") String id,
             @Query("select") String select
+    );
+
+    @FormUrlEncoded
+    @POST("Hoothub_Comment_2")
+    Call<List<comment>> createComment(
+            @Field("post_id") String post_id,
+            @Field("user_id") String user_id,
+            @Field("username") String username,
+            @Field("content") String content,
+            @Header("Prefer") String preferHeader
     );
 }

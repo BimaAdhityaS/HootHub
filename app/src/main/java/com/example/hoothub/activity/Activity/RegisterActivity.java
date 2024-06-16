@@ -51,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         et_confirmpassword = (EditText) findViewById(R.id.input_signupConfirmPassword);
 
         sp = getSharedPreferences("userCred", Context.MODE_PRIVATE);
+        getSupportActionBar().hide();
     }
 
     @Override

@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.hoothub.R;
 import com.example.hoothub.adapter.ListPostAdapter;
-import com.example.hoothub.lib.Post;
 import com.example.hoothub.model.post;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
@@ -84,7 +83,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.floatingActionButton) {
-            Intent intent = new Intent(getActivity(), AddPost.class);
+            Intent intent = new Intent(getActivity(), AddPostActivity.class);
             startActivity(intent);
         }
     }

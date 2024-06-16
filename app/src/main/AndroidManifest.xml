@@ -15,10 +15,13 @@
         android:theme="@style/Theme.HootHub"
         tools:targetApi="31">
         <activity
+            android:name=".activity.Activity.AddCommentActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.Activity.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.Activity.AddPost"
+            android:name=".activity.Activity.AddPostActivity"
             android:exported="false" />
         <activity
             android:name=".activity.Activity.RegisterActivity"

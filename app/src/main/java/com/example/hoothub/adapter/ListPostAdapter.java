@@ -18,58 +18,48 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.hoothub.R;
 import com.example.hoothub.activity.Activity.CommentFragment;
-import com.example.hoothub.lib.Post;
+import com.example.hoothub.model.post;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListViewHolder> {
-    private ArrayList<Post> postList;
-    private boolean isLiked;
+    private ArrayList<post> postList;
     private Context context;
-    public ListPostAdapter(Context context, ArrayList<Post> list) {
 
+    public ListPostAdapter(Context context, ArrayList<post> list) {
         this.context = context;
         this.postList = list;
     }
+
     @NonNull
     @Override
-    public ListPostAdapter.ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
-
         return new ListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListPostAdapter.ListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
+        post currentPost = postList.get(position);
 
-        Post post = postList.get(position);
-        Glide.with(holder.itemView.getContext())
-                        .load(post.getImg()).apply(
-                                new RequestOptions().override(55,55)
-                ).into(holder.tvimg);
-        holder.tvname.setText(post.getName());
-        holder.tvcontent.setText(post.getPost_content());
-        holder.tvcomment.setText(String.valueOf(post.getPost_comment()) + " " + "comments");
-        holder.tvliked.setText(String.valueOf(post.getPost_like()) + " " + "likes");
-        holder.tvtime.setText(post.getTime());
+        // Use a dummy image from drawable resources
+        holder.tvimg.setImageResource(R.drawable.dummy_image);  // Replace 'dummy_image' with your actual drawable resource name
 
-        isLiked = true;
-        holder.btnLiked.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                if(isLiked){
-                    holder.btnLiked.setImageResource(R.drawable.like_img);
-
-                }else {
-                    holder.btnLiked.setImageResource((R.drawable.like_vektor));
-                }
-                isLiked = !isLiked;
-            }
-        });
+        holder.tvname.setText(currentPost.getUser_name());
+        holder.tvcontent.setText(currentPost.getContent());
+        holder.tvcomment.setText(currentPost.getComment_count() + " comments");
+        holder.tvliked.setText(currentPost.getLike_count() + " likes");
+        String formattedDate = formatDate(currentPost.getCreated_at());
+        holder.tvtime.setText(formattedDate);
 
         holder.btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment commentFragment = new CommentFragment();
+                Fragment commentFragment = CommentFragment.newInstance(Integer.parseInt(currentPost.getId()));
                 FragmentTransaction fragmentTransaction = ((FragmentActivity) context)
                         .getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, commentFragment);
@@ -84,9 +74,21 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
         return postList.size();
     }
 
+    private String formatDate(String inputDateString) {
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.ENGLISH);
+        SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMMM yyyy hh:mm a", Locale.ENGLISH);
+        try {
+            Date date = inputDateFormat.parse(inputDateString);
+            return outputDateFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return inputDateString; // Return the original string in case of error
+        }
+    }
+
     public class ListViewHolder extends RecyclerView.ViewHolder {
         TextView tvname, tvcontent, tvtime, tvliked, tvcomment;
-        ImageButton btnLiked, btnComment;
+        ImageButton btnComment;
         ImageView tvimg;
 
         public ListViewHolder(@NonNull View itemView) {
@@ -97,7 +99,6 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
             tvtime = itemView.findViewById(R.id.time);
             tvliked = itemView.findViewById(R.id.post_liked);
             tvimg = itemView.findViewById(R.id.user_profile_image1);
-            btnLiked = itemView.findViewById(R.id.like);
             btnComment = itemView.findViewById(R.id.comment);
         }
     }

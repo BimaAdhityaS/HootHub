@@ -35,6 +35,9 @@ public interface ApiInterface {
     Call<List<post>> createPost(
             @Field("content") String content,
             @Field("user_id") String user_id,
+            @Field("username") String username,
             @Header("Prefer") String preferHeader
     );
+    @GET("Hoothub_Post_1")
+    Call<List<post>> getPosts();
 }

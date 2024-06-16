@@ -64,9 +64,10 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
     private void btnCreateContentClicked() {
         String content = et_post.getText().toString();
         String userId = sp.getString("user_id", null);
+        String username = sp.getString("username",null);
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<post>> call = apiInterface.createPost(
-                content, userId, "return=representation"
+                content, userId, username,"return=representation"
         );
 
         call.enqueue(new Callback<List<post>>() {

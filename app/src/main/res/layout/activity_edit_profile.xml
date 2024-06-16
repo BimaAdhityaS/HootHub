@@ -6,16 +6,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:paddingTop="?attr/actionBarSize"
+    android:fitsSystemWindows="true">
+
     <Button
-        android:id="@+id/btnCancel"
+        android:id="@+id/btn_cancel_editProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/plus_jakarta_sans"
         android:gravity="start"
         android:text="Cancel"
-        android:layout_marginLeft="19dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="19dp"
         android:textColor="@color/blueButton"
         android:textFontWeight="800"
@@ -33,7 +36,7 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnCancel" />
+        app:layout_constraintTop_toBottomOf="@id/btn_cancel_editProfile" />
 
     <TextView
         android:id="@+id/textFirstName"
@@ -148,7 +151,7 @@
 
     <!-- Button Save -->
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSaveProfile"
+        android:id="@+id/btn_save_editProfile"
         style="@style/ButtonSaveProfile"
         android:layout_marginTop="12dp"
         android:textFontWeight="600"

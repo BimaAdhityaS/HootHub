@@ -17,7 +17,7 @@
             android:layout_height="68dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="23dp"
-            android:src="@drawable/bobby_image"
+            android:src="@drawable/img_dummyprofilepic"
             app:civ_border_color="#FF000000"
             app:civ_border_width="0dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:text="Bobby Rafael"
+            android:text="Name"
             android:textSize="22dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_profile_image1" />
@@ -60,44 +60,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="@string/app_name"
+            android:text="Username"
             android:textColor="#687684"
             android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name_profile" />
 
         <TextView
-            android:id="@+id/desc_profile_1"
+            android:id="@+id/bio_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="12dp"
-            android:text="@string/app_name"
+            android:text="Bio"
             android:textColor="#141619"
             android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username_profile" />
 
-        <TextView
-            android:id="@+id/desc_profile_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="development; Graphics; Illustrations"
-            android:textColor="#141619"
-            android:textSize="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/desc_profile_1" />
-
         <LinearLayout
             android:id="@+id/linear_layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
             android:gravity="center"
-
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/desc_profile_2">
+            app:layout_constraintTop_toBottomOf="@+id/bio_profile">
 
             <TextView
                 android:id="@+id/your_threads"
@@ -122,161 +111,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             app:layout_constraintTop_toBottomOf="@+id/linear_layout1"
             app:layout_constraintStart_toStartOf="parent"
             >
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.1"
-                android:orientation="horizontal">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_post"
+                />
 
-                <!-- Profile Picture -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/user_profile_image3"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/bobby_image"
-                        app:civ_border_color="#FF000000"
-                        app:civ_border_width="0dp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:orientation="vertical">
-
-                <!-- Username and Comment Text-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!--Comment-->
-                    <TextView
-                        android:id="@+id/name_thread"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/plus_jakarta_sans"
-                        android:paddingBottom="2dp"
-                        android:text="Bobby Rafael"
-                        android:textColor="@color/black"
-                        android:textFontWeight="800"
-                        android:textSize="16dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/plus_jakarta_sans"
-                        android:paddingBottom="2dp"
-                        android:text="Aku suka AR VR"
-                        android:textColor="@color/black"
-                        android:textSize="12dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageButton
-                            android:id="@+id/likebtn"
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:background="@null"
-                            android:drawablePadding="8dp"
-                            android:onClick="onButtonClick"
-                            android:paddingStart="16dp"
-                            android:paddingEnd="16dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/img_liked" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/plus_jakarta_sans"
-                            android:paddingLeft="4dp"
-                            android:paddingTop="4dp"
-                            android:text="1k"
-                            android:textColor="@color/lightText"
-                            android:textSize="12dp" />
-
-                        <ImageButton
-                            android:id="@+id/commentIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginLeft="8dp"
-                            android:background="@null"
-                            android:drawablePadding="8dp"
-                            android:onClick="onButtonClick"
-                            android:paddingStart="16dp"
-                            android:paddingTop="2dp"
-                            android:paddingEnd="16dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/img_comment" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/plus_jakarta_sans"
-                            android:paddingLeft="4dp"
-                            android:paddingTop="4dp"
-                            android:text="2"
-                            android:textColor="@color/lightText"
-                            android:textSize="12dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/plus_jakarta_sans"
-                            android:paddingLeft="4dp"
-                            android:paddingTop="4dp"
-                            android:text="k"
-                            android:textColor="@color/lightText"
-                            android:textSize="12dp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <!-- Time Post -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/plus_jakarta_sans"
-                        android:paddingBottom="2dp"
-                        android:text="48m"
-                        android:textColor="@color/lightText"
-                        android:textSize="12dp" />
-
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"

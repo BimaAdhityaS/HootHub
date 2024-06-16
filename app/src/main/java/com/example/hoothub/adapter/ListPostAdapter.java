@@ -67,6 +67,8 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                 fragmentTransaction.commit();
             }
         });
+
+
     }
 
     @Override

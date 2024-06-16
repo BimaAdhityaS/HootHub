@@ -40,4 +40,10 @@ public interface ApiInterface {
     );
     @GET("Hoothub_Post_1")
     Call<List<post>> getPosts();
+
+    @GET("Hoothub_Post_1")
+    Call<List<post>> getContent(
+            @Query("id") String id,
+            @Query("select") String select
+    );
 }

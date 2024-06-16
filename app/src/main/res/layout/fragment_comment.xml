@@ -70,6 +70,7 @@
                 <!-- Text Postingan-->
                 <!-- Text nanti diganti dengan text postingan dari DB-->
                 <TextView
+                    android:id="@+id/et_Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/plus_jakarta_sans"

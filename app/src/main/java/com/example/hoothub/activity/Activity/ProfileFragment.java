@@ -17,7 +17,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         editBtn = view.findViewById(R.id.edit_profile);
         editBtn.setOnClickListener(this);
         signOutBtn = view.findViewById(R.id.sign_out_profile);

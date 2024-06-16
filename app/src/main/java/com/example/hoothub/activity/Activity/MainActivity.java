@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(new PostFragment(), false);
                     return true;
                 } else if (itemId == R.id.profile) {
-                    // loadFragment(new ProfileFragment(), false);
+                    loadFragment(new ProfileFragment(), false);
                     return true;
                 }
                 return false;

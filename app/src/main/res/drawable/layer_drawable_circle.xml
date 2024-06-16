@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background Image -->
+    <item android:drawable="@drawable/bobby_image"
+        />
+
+    <!-- Circular Darker Overlay -->
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <corners android:radius="50dp"/>
+            <solid android:color="#80000000"/>
+        </shape>
+    </item>
+    <item android:drawable="@drawable/plus_layout"
+        android:width="1000dp"
+        android:height="1000dp"
+        android:gravity="center"
+        >
+
+    </item>
+
+</layer-list>

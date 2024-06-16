@@ -1,153 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    android:background="@android:color/white">
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/plus_jakarta_sans"
+        android:gravity="start"
+        android:text="Cancel"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="19dp"
+        android:textColor="@color/blueButton"
+        android:textFontWeight="800"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        android:paddingBottom="8dp">
-
-        <Button
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="4dp"
-            android:paddingLeft="24dp"
-            android:backgroundTint="@color/white"
-            android:fontFamily="@font/plus_jakarta_sans"
-            android:text="Cancel"
-            android:textColor="@color/blueButton"
-            android:textFontWeight="800"
-            android:textSize="17dp" />
-
-
-
-    </LinearLayout>
-
-    <!-- Profile Picture ImageButton -->
-    <ImageButton
-        android:id="@+id/profile_picture_button"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/bobby_image"
-        android:background="@drawable/circle_button_background"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_gravity="center"
+        android:src="@drawable/layer_drawable_circle"
+        android:onClick="onPlusButtonClick"
 
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnCancel" />
 
-    <!-- LinearLayout for First Name and Others -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textFirstName"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/profile_picture_button"
-        android:layout_marginTop="24dp">
-
-        <!-- First Name Label -->
-        <TextView
-            android:id="@+id/first_name_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="First Name"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
-
-        <!-- Edit Text for First Name -->
-        <EditText
-            android:id="@+id/first_name_edit_text"
-            style="@style/InputForm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Bobby"
-            android:inputType="text"
-            android:layout_marginTop="8dp"
-            android:textColorHint="#000000"/>
-
-        <!-- Last Name Label -->
-        <TextView
-            android:id="@+id/last_name_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last Name"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp" />
-
-        <!-- Edit Text for Last Name -->
-        <EditText
-            android:id="@+id/last_name_edit_text"
-            style="@style/InputForm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Rafael"
-            android:inputType="text"
-            android:layout_marginTop="8dp"
-            android:textColorHint="#000000"/>
-
-        <!-- Username Label -->
-        <TextView
-            android:id="@+id/username_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp" />
-
-        <!-- Edit Text for Username -->
-        <EditText
-            android:id="@+id/username_edit_text"
-            style="@style/InputForm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="BobbyRafael"
-            android:inputType="text"
-            android:layout_marginTop="8dp"
-            android:textColorHint="#000000"/>
-
-        <!-- Bio Label -->
-        <TextView
-            android:id="@+id/bio_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bio"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp" />
-
-        <!-- Edit Text for Bio -->
-        <EditText
-            android:id="@+id/bio_edit_text"
-            style="@style/InputForm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nocturnix Team - Web and Game development; Graphics; Illustrations"
-            android:inputType="textMultiLine"
-            android:layout_marginTop="8dp"
-            android:textColorHint="#000000" />
-
-
-    </LinearLayout>
-
-
-    <!-- Save Button -->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/save"
-        style="@style/ButtonRegisterLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="28dp"
-        android:text="SAVE"
+        android:text="First Name"
+        android:textColor="@color/black"
         android:textFontWeight="600"
-        android:backgroundTint="@color/floatingButton"/>
+        android:textSize="16sp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/plus_jakarta_sans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgButton" />
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/formFirstName"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="4dp"
+        android:hint="Enter Your Full Name.."
+        android:inputType="textPersonName"
+        style="@style/InputForm"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textFirstName" />
+
+
+    <TextView
+        android:id="@+id/textLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textFontWeight="600"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:fontFamily="@font/plus_jakarta_sans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formFirstName"
+        />
+
+    <EditText
+        android:id="@+id/formLastName"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="4dp"
+        android:hint="Enter Your Last Name.."
+        android:layout_marginHorizontal="20dp"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textLastName"
+        style="@style/InputForm"/>
+
+    <TextView
+        android:id="@+id/textUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:layout_marginHorizontal="20dp"
+        android:textFontWeight="600"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/plus_jakarta_sans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formLastName"
+        />
+
+    <EditText
+        android:id="@+id/formUsername"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="4dp"
+        android:hint="Enter Your Username.."
+        android:layout_marginHorizontal="20dp"
+        android:inputType="textPersonName"
+        style="@style/InputForm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textUsername"
+        />
+
+    <TextView
+        android:id="@+id/textBio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bio"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textFontWeight="600"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:fontFamily="@font/plus_jakarta_sans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formUsername"
+        />
+
+    <EditText
+        android:id="@+id/formBio"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="4dp"
+        android:hint="Enter Your Bio.."
+        android:layout_marginHorizontal="20dp"
+        android:inputType="textShortMessage|text"
+        style="@style/InputForm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textBio"
+        />
+
+
+    <!-- Button Save -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSaveProfile"
+        style="@style/ButtonSaveProfile"
+        android:layout_marginTop="12dp"
+        android:textFontWeight="600"
+        android:text="Save"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/formBio"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

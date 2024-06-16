@@ -15,6 +15,9 @@
         android:theme="@style/Theme.HootHub"
         tools:targetApi="31">
         <activity
+            android:name=".activity.Activity.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.Activity.AddPost"
             android:exported="false" />
         <activity

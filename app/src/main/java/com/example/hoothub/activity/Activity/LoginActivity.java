@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //simpan user_id yang login ke sharedpreference
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("user_id", login_data.getId());
+                    editor.putString("username", login_data.getUsername());
                     editor.apply();
 
                     // Intent to start RegisterActivity

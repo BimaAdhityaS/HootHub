@@ -96,6 +96,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     //simpan user_id yang kebuat ke sharedpreference
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("user_id", createdUser.getId());
+                    editor.putString("username", createdUser.getUsername());
                     editor.apply();
 
                     // Intent to start RegisterActivity

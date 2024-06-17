@@ -107,7 +107,7 @@
                         android:fontFamily="@font/plus_jakarta_sans"
                         android:paddingStart="0dp"
                         android:paddingEnd="4dp"
-                        android:text="@string/dummy_comment_value"
+                        android:text="0"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -139,7 +139,7 @@
                         android:fontFamily="@font/plus_jakarta_sans"
                         android:paddingStart="0dp"
                         android:paddingEnd="4dp"
-                        android:text="@string/dummy_like_value"
+                        android:text="0"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 

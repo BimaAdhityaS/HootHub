@@ -94,7 +94,8 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<comment>> call = apiInterface.getComment(
                 "eq." + postId,
-                "*"
+                "*",
+                "created_at"
         );
         call.enqueue(new Callback<List<comment>>() {
             @Override

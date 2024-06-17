@@ -118,7 +118,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         profileName.setText(user_data.getFirstName() + " " + user_data.getLastName());
                     }
 
-                    userName.setText(user_data.getUsername());
+                    userName.setText("@" + user_data.getUsername());
 
                     if (user_data.getBio() == null) {
                         bio.setText("Fill your bio with hobbies, inquiry, and etc.");

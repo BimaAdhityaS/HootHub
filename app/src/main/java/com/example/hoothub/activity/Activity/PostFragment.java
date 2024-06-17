@@ -59,7 +59,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 
     private void fetchPosts() {
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<post>> call = apiInterface.getPosts();
+        Call<List<post>> call = apiInterface.getPosts("created_at");
 
         call.enqueue(new Callback<List<post>>() {
             @Override

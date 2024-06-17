@@ -48,11 +48,33 @@ public interface ApiInterface {
     @GET("User")
     Call<List<user>> getCurrentUser(@Query("id") String id, @Query("select") String select);
 
+    //Get semua post yang di send oleh current user
     @GET("Hoothub_Post_1")
     Call<List<post>> getCurrentUserPost(
             @Query("user_id") String user_id,
             @Query("select") String select
     );
+
+    //PATCH Update semua post dengan username yang diganti
+    @FormUrlEncoded
+    @PATCH("Hoothub_Post_1")
+    Call<List<post>> updatePostUserName(
+            @Query("user_id") String user_id,
+            @Field("username") String username);
+
+    @FormUrlEncoded
+    @PATCH("Hoothub_Comment_2")
+    Call<List<comment>> updateCommentUserName(
+            @Query("user_id") String user_id,
+            @Field("username") String username);
+
+    @FormUrlEncoded
+    @PATCH("Hoothub_Reply_3")
+    Call<List<reply>> updateReplyUserName(
+            @Query("user_id") String user_id,
+            @Field("username") String username);
+
+
 
     @FormUrlEncoded
     @POST("Hoothub_Post_1")
@@ -64,7 +86,7 @@ public interface ApiInterface {
     );
 
     @GET("Hoothub_Post_1")
-    Call<List<post>> getPosts();
+    Call<List<post>> getPosts(@Query("order") String order);
 
     @GET("Hoothub_Post_1")
     Call<List<post>> getContent(
@@ -85,7 +107,8 @@ public interface ApiInterface {
     @GET("Hoothub_Comment_2")
     Call<List<comment>> getComment(
             @Query("post_id") String post_id,
-            @Query("select") String select
+            @Query("select") String select,
+            @Query("order") String order
     );
     @GET("Hoothub_Comment_2")
     Call<List<comment>> getCommentById(
@@ -106,6 +129,7 @@ public interface ApiInterface {
     @GET("Hoothub_Reply_3")
     Call<List<reply>> getReply(
             @Query("comment_id") String comment_id,
-            @Query("select") String select
+            @Query("select") String select,
+            @Query("order") String order
     );
 }

@@ -18,8 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.hoothub.R;
+import com.example.hoothub.model.reply;
+import com.example.hoothub.model.comment;
+import com.example.hoothub.model.post;
 import com.example.hoothub.model.user;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
@@ -41,7 +47,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_edit_profile);
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             getSupportActionBar().setCustomView(R.layout.actionbar_layout);
@@ -68,8 +73,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_cancel_editProfile) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            finish();
         } else if (v.getId() == R.id.btn_save_editProfile) {
             String firstname = input_firstName.getText().toString();
             String lastname = input_lastName.getText().toString();
@@ -79,6 +83,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 Toast.makeText(EditProfileActivity.this, "Please fill all the fields!!", Toast.LENGTH_SHORT).show();
             } else {
                 updateUserProfile();
+                updateAllPostUsername();
+                updateAllCommentUsername();
+                updateAllReplyUsername();
+                finish();
             }
         }
     }
@@ -100,10 +108,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             public void onResponse(Call<List<user>> call, Response<List<user>> response) {
                 if (response.isSuccessful()) {
                     Log.d("Edit Profile", "User Updated!!!");
-
-                    Intent intent;
-                    intent = new Intent(EditProfileActivity.this, MainActivity.class);
-                    startActivity(intent);
                 } else {
                     Log.e("Edit Profile", "Failed to update user data: " + response.errorBody());
                 }
@@ -111,6 +115,69 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onFailure(Call<List<user>> call, Throwable t) {
+                Log.e("Edit Profile", "API call failed: " + t.getMessage(), t);
+            }
+        });
+    }
+
+    public void updateAllPostUsername(){
+        String user_id = sp.getString("user_id", "");
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<post>> call = apiInterface.updatePostUserName(
+                "eq."+user_id,
+                input_userName.getText().toString()
+        );
+        call.enqueue(new Callback<List<post>>() {
+            @Override
+            public void onResponse(Call<List<post>> call, Response<List<post>> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Edit Profile", "All Post Successfully Updated");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<post>> call, Throwable t) {
+                Log.e("Edit Profile", "API call failed: " + t.getMessage(), t);
+            }
+        });
+    }
+
+    public void updateAllCommentUsername(){
+        String user_id = sp.getString("user_id", "");
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<comment>> call = apiInterface.updateCommentUserName(
+                "eq."+user_id,
+                input_userName.getText().toString()
+        );
+        call.enqueue(new Callback<List<comment>>() {
+            @Override
+            public void onResponse(Call<List<comment>> call, Response<List<comment>> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Edit Profile", "All Comment Successfully Updated");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<comment>> call, Throwable t) {
+                Log.e("Edit Profile", "API call failed: " + t.getMessage(), t);
+            }
+        });
+    }
+
+    public void updateAllReplyUsername(){
+        String user_id = sp.getString("user_id", "");
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<reply>> call = apiInterface.updateReplyUserName(
+                "eq."+user_id,
+                input_userName.getText().toString()
+        );
+        call.enqueue(new Callback<List<reply>>() {
+            @Override
+            public void onResponse(Call<List<reply>> call, Response<List<reply>> response) {
+                if (response.isSuccessful()) {
+                    Log.d("Edit Profile", "All Reply Successfully Updated");
+                }
+            }
+            @Override
+            public void onFailure(Call<List<reply>> call, Throwable t) {
                 Log.e("Edit Profile", "API call failed: " + t.getMessage(), t);
             }
         });

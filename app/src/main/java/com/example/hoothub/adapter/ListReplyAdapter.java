@@ -35,7 +35,7 @@ public class ListReplyAdapter extends RecyclerView.Adapter<ListReplyAdapter.List
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reply, parent, false);
         return new ListViewHolder(view);
     }
 

@@ -34,7 +34,7 @@
             android:layout_height="55dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/bobby_image"
+            android:src="@drawable/img_dummyprofilepic"
             app:civ_border_color="#FF000000"
             app:civ_border_width="0dp" />
 
@@ -91,10 +91,9 @@
 
             <!-- Comments Section -->
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:layout_weight="0.4"
                 android:orientation="horizontal">
 
                 <TextView
@@ -102,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/plus_jakarta_sans"
                     android:paddingRight="4dp"
-                    android:text="3"
+                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
@@ -117,10 +116,9 @@
 
             <!-- Likes Section -->
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:layout_weight="1.4"
                 android:orientation="horizontal">
 
                 <TextView
@@ -128,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/plus_jakarta_sans"
                     android:paddingRight="4dp"
-                    android:text="2.8k"
+                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 

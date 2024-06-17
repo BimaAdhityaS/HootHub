@@ -15,6 +15,9 @@
         android:theme="@style/Theme.HootHub"
         tools:targetApi="31">
         <activity
+            android:name=".activity.Activity.AddReplyActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.Activity.AddCommentActivity"
             android:exported="false" />
         <activity

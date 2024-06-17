@@ -4,6 +4,7 @@ import android.database.Observable;
 
 import com.example.hoothub.model.comment;
 import com.example.hoothub.model.post;
+import com.example.hoothub.model.reply;
 import com.example.hoothub.model.user;
 
 import java.util.List;
@@ -84,6 +85,27 @@ public interface ApiInterface {
     @GET("Hoothub_Comment_2")
     Call<List<comment>> getComment(
             @Query("post_id") String post_id,
+            @Query("select") String select
+    );
+    @GET("Hoothub_Comment_2")
+    Call<List<comment>> getCommentById(
+            @Query("id") String id,
+            @Query("select") String select
+    );
+
+    @FormUrlEncoded
+    @POST("Hoothub_Reply_3")
+    Call<List<reply>> createReply(
+            @Field("comment_id") String comment_id,
+            @Field("user_id") String user_id,
+            @Field("username") String username,
+            @Field("content") String content,
+            @Header("Prefer") String preferHeader
+    );
+
+    @GET("Hoothub_Reply_3")
+    Call<List<reply>> getReply(
+            @Query("comment_id") String comment_id,
             @Query("select") String select
     );
 }

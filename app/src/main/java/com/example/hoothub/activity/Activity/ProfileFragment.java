@@ -150,7 +150,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<post>> call = apiInterface.getCurrentUserPost(
                 "eq." + user_id,
-                "*"
+                "*",
+                "created_at"
         );
 
         call.enqueue(new Callback<List<post>>() {

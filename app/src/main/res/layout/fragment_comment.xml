@@ -46,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/plus_jakarta_sans"
                         android:paddingBottom="2dp"
-                        android:text="@string/dummy_name"
+                        android:text="Loading.."
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/plus_jakarta_sans"
-                        android:text="@string/dummy_username"
+                        android:text="@loading.."
                         android:textColor="@color/lightText"
                         android:textSize="16sp" />
 
@@ -101,7 +101,7 @@
                     <!-- Jumlah Komentar -->
                     <!-- Text nanti diganti dengan jumlah value dari DB-->
                     <TextView
-                        android:id="@+id/comments"
+                        android:id="@+id/comments_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/plus_jakarta_sans"

@@ -52,6 +52,8 @@ public class AddReplyActivity extends AppCompatActivity implements View.OnClickL
         et_reply = findViewById(R.id.et_reply);
         btn_cancel_reply.setOnClickListener(this);
         btn_post_reply.setOnClickListener(this);
+
+        getWindow().setStatusBarColor(getResources().getColor(R.color.white));
     }
 
     @Override

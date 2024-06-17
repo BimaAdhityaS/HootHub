@@ -55,6 +55,8 @@ public class AddCommentActivity extends AppCompatActivity implements View.OnClic
         btn_cancel.setOnClickListener(this);
         btn_post.setOnClickListener(this);
 
+        getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+
     }
 
     @Override
@@ -90,7 +92,6 @@ public class AddCommentActivity extends AppCompatActivity implements View.OnClic
             public void onResponse(Call<List<comment>> call, Response<List<comment>> response) {
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
                     Log.d("AddComment", "Content created successfully: " + response.body());
-
                     Intent intent = new Intent(AddCommentActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {

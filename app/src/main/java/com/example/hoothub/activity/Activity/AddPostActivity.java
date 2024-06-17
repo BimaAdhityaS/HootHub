@@ -44,6 +44,8 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         et_post = findViewById(R.id.et_post);
         btn_cancel.setOnClickListener(this);
         btn_post.setOnClickListener(this);
+
+        getWindow().setStatusBarColor(getResources().getColor(R.color.white));
     }
 
     @Override
@@ -75,7 +77,6 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
             public void onResponse(Call<List<post>> call, Response<List<post>> response) {
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
                     Log.d("AddPost", "Content created successfully: " + response.body());
-
                     Intent intent = new Intent(AddPostActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {

@@ -52,7 +52,8 @@ public interface ApiInterface {
     @GET("Hoothub_Post_1")
     Call<List<post>> getCurrentUserPost(
             @Query("user_id") String user_id,
-            @Query("select") String select
+            @Query("select") String select,
+            @Query("order") String order
     );
 
     //PATCH Update semua post dengan username yang diganti

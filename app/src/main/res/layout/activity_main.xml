@@ -8,19 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".activity.Activity.MainActivity">
-<!--    <FrameLayout-->
-<!--        android:id="@+id/frame_layout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_weight="1">-->
 
-<!--&lt;!&ndash;        <Button&ndash;&gt;-->
-<!--&lt;!&ndash;            android:id="@+id/btnlogout"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:text="Logout" />&ndash;&gt;-->
-
-<!--    </FrameLayout>-->
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"

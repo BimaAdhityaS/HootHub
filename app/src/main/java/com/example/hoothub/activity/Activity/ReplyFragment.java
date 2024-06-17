@@ -38,7 +38,7 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
     private static final String ARG_PARAM1 = "comment_id";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
-    private TextView tvTitle, tvUsername, tvUsername_2;
+    private TextView tvTitle, tvUsername, tvUsername_2, tvReplyCount;
     private FloatingActionButton floatingActionButton;
     private ArrayList<reply> list = new ArrayList<>();
     private ListReplyAdapter listReplyAdapter;
@@ -75,6 +75,7 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
         tvTitle = view.findViewById(R.id.et_content);
         tvUsername = view.findViewById(R.id.et_username_1);
         tvUsername_2 = view.findViewById(R.id.et_username_2);
+        tvReplyCount = view.findViewById(R.id.reply_count);
         rvReply = view.findViewById(R.id.rvReply);
         floatingActionButton.setOnClickListener(this);
         return view;
@@ -132,6 +133,7 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
                     tvTitle.setText(comment.getContent());
                     tvUsername.setText(comment.getUsername());
                     tvUsername_2.setText("@"+comment.getUsername());
+                    tvReplyCount.setText(comment.getReply_count());
                 } else {
                     Log.e("ReplyFragment", "Failed to fetch comment");
                 }

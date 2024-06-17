@@ -55,6 +55,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             customActionBarView.setPadding(32, 32, 32, 32);
         }
 
+        getWindow().setStatusBarColor(getResources().getColor(R.color.background));
+
         cancelBtn = findViewById(R.id.btn_cancel_editProfile);
         saveBtn = findViewById(R.id.btn_save_editProfile);
 

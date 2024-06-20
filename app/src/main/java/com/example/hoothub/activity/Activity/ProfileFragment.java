@@ -140,7 +140,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private void showRecylcerList(Context context) {
         rvText.setLayoutManager(new LinearLayoutManager(context));
-        listPostAdapter = new ListPostAdapter(context, list);
+        listPostAdapter = new ListPostAdapter(context, list, sp);
         rvText.setAdapter(listPostAdapter);
     }
 

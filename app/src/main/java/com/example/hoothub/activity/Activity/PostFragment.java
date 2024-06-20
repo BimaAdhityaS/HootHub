@@ -2,6 +2,7 @@ package com.example.hoothub.activity.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.hoothub.R;
 import com.example.hoothub.adapter.ListPostAdapter;
+import com.example.hoothub.model.like_post;
 import com.example.hoothub.model.post;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
@@ -33,6 +35,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
     private ArrayList<post> list = new ArrayList<>();
     private FloatingActionButton floatingActionButton;
     private ListPostAdapter listPostAdapter;
+    SharedPreferences sp;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +43,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         rvText = view.findViewById(R.id.rvText);
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
         rvText.setHasFixedSize(true);
-
+        sp = getActivity().getSharedPreferences("userCred", Context.MODE_PRIVATE);
         floatingActionButton.setOnClickListener(this);
 
         // Initialize the adapter and RecyclerView
@@ -50,13 +53,11 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 
         return view;
     }
-
     private void showRecylcerList(Context context) {
         rvText.setLayoutManager(new LinearLayoutManager(context));
-        listPostAdapter = new ListPostAdapter(context, list);
+        listPostAdapter = new ListPostAdapter(context, list, sp);
         rvText.setAdapter(listPostAdapter);
     }
-
     private void fetchPosts() {
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<post>> call = apiInterface.getPosts("created_at");

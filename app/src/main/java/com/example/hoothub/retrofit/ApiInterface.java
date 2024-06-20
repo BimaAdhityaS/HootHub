@@ -3,6 +3,7 @@ package com.example.hoothub.retrofit;
 import android.database.Observable;
 
 import com.example.hoothub.model.comment;
+import com.example.hoothub.model.like_post;
 import com.example.hoothub.model.post;
 import com.example.hoothub.model.reply;
 import com.example.hoothub.model.user;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -133,4 +135,23 @@ public interface ApiInterface {
             @Query("select") String select,
             @Query("order") String order
     );
+    @GET("Like_Post")
+    Call<List<like_post>> getLikePost(
+            @Query("user_id") String user_id,
+            @Query("post_id") String post_id,
+            @Query("select") String select
+    );
+    @FormUrlEncoded
+    @POST("Like_Post")
+    Call<List<like_post>> createLikePost(
+            @Field("user_id") String user_id,
+            @Field("post_id") String post_id,
+            @Header("Prefer") String preferHeader
+    );
+    @DELETE("Like_Post")
+    Call<List<like_post>> deleteLikePost(
+            @Query("user_id") String user_id,
+            @Query("post_id") String post_id
+    );
+
 }

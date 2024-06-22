@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,7 +24,6 @@ import com.example.hoothub.R;
 import com.example.hoothub.activity.Activity.CommentFragment;
 import com.example.hoothub.model.like_post;
 import com.example.hoothub.model.post;
-import com.example.hoothub.model.user;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
 
@@ -86,18 +86,33 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                 fetchAddLike(currentPost.getId(), userId, holder);
             }
         });
-        holder.btnOption.setOnClickListener(view -> {
-            PopupMenu popupMenu = new PopupMenu(context, holder.btnOption);
-            popupMenu.inflate(R.menu.popup_report_menu);
-            popupMenu.setOnMenuItemClickListener(item -> {
-               if(item.getItemId() == R.id.report){
-                   Log.d("PopupMenu", "Edit clicked");
-                   showReportDialog();
-               }
-                return false;
+            holder.btnOption.setImageResource(R.drawable.options);
+            holder.btnOption.setOnClickListener(view -> {
+                PopupMenu popupMenu = new PopupMenu(context, holder.btnOption);
+                if(userId != null && !userId.equals(String.valueOf(currentPost.getUser_id()))) {
+                    popupMenu.inflate(R.menu.popup_report_menu);
+                    popupMenu.setOnMenuItemClickListener(item -> {
+                        if (item.getItemId() == R.id.report) {
+                            Log.d("PopupMenu", "Edit clicked");
+                            showReportDialog();
+                        }
+                        return false;
+                    });
+                }else{
+                    popupMenu.inflate(R.menu.popup_edit_delete_menu);
+                    popupMenu.setOnMenuItemClickListener(item -> {
+                        if(item.getItemId() == R.id.edit_content){
+                            Toast.makeText(context, "You Edit this Content",Toast.LENGTH_SHORT).show();
+                        } else if (item.getItemId() == R.id.delete_content) {
+                            Toast.makeText(context, "You Delete this Content",Toast.LENGTH_SHORT).show();
+                        }
+                        return false;
+                    });
+                }
+                popupMenu.show();
             });
-            popupMenu.show();
-        });
+
+
     }
 
     private void showReportDialog() {

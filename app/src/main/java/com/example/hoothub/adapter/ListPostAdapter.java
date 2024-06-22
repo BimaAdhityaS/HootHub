@@ -3,6 +3,7 @@ package com.example.hoothub.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hoothub.R;
 import com.example.hoothub.activity.Activity.CommentFragment;
+import com.example.hoothub.activity.Activity.OtherProfileFragment;
 import com.example.hoothub.model.like_post;
 import com.example.hoothub.model.post;
 import com.example.hoothub.retrofit.ApiInterface;
@@ -78,6 +80,18 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
             fragmentTransaction.commit();
         });
 
+        holder.tvimg.setOnClickListener(view -> {
+            Fragment otherProfileFragment = new OtherProfileFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("user_id", currentPost.getUser_id()); // Pass user ID to the fragment
+            otherProfileFragment.setArguments(bundle);
+            FragmentTransaction fragmentTransaction = ((FragmentActivity) context)
+                    .getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, otherProfileFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        });
+
         holder.btnLike.setOnClickListener(view -> {
             if (holder.isLiked) {
                 fetchDeleteLike(currentPost.getId(), userId, holder);
@@ -111,8 +125,6 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                 }
                 popupMenu.show();
             });
-
-
     }
 
     private void showReportDialog() {
@@ -166,6 +178,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                 Log.e("AddLikePost", "API call failed: " + throwable.getMessage(), throwable);
             }
         });
+
     }
 
     private void fetchDeleteLike(String postId, String userId, ListViewHolder holder) {

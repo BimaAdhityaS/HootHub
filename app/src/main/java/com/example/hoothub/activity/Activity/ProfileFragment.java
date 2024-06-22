@@ -43,7 +43,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private ArrayList<post> list = new ArrayList<>();
     private ListPostAdapter listPostAdapter;
     SharedPreferences sp;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);

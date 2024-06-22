@@ -2,6 +2,7 @@ package com.example.hoothub.activity.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +41,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
     private FloatingActionButton floatingActionButton;
     private ArrayList<comment> list = new ArrayList<>();
     private ListCommentAdapter listCommentAdapter;
-
+    SharedPreferences sp;
     public CommentFragment() {
         // Required empty public constructor
     }
@@ -67,6 +68,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_comment, container, false);
+        sp = getActivity().getSharedPreferences("userCred", Context.MODE_PRIVATE);
         tvTitle = view.findViewById(R.id.et_Title);
         tvUsername = view.findViewById(R.id.et_username);
         tvUsername_2 = view.findViewById(R.id.et_username_2);
@@ -87,7 +89,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
 
     private void showRecylcerList(Context context) {
         rvComment.setLayoutManager(new LinearLayoutManager(context));
-        listCommentAdapter = new ListCommentAdapter(context, list);
+        listCommentAdapter = new ListCommentAdapter(context, list, sp);
         rvComment.setAdapter(listCommentAdapter);
     }
 

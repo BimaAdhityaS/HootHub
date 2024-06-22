@@ -1,5 +1,6 @@
 package com.example.hoothub.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,7 +65,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
         holder.tvname.setText(currentPost.getUser_name());
         holder.tvcontent.setText(currentPost.getContent());
         holder.tvcomment.setText(currentPost.getComment_count() + " comments");
-        holder.tvliked.setText(currentPost.getLike_count() + " likes");
+        holder.tvliked.setText(currentPost.getLike_count());
         String formattedDate = formatDate(currentPost.getCreated_at());
         holder.tvtime.setText(formattedDate);
         fetchLikePost(currentPost.getId(), userId, holder);
@@ -83,26 +86,43 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                 fetchAddLike(currentPost.getId(), userId, holder);
             }
         });
+        holder.btnOption.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(context, holder.btnOption);
+            popupMenu.inflate(R.menu.popup_report_menu);
+            popupMenu.setOnMenuItemClickListener(item -> {
+               if(item.getItemId() == R.id.report){
+                   Log.d("PopupMenu", "Edit clicked");
+                   showReportDialog();
+               }
+                return false;
+            });
+            popupMenu.show();
+        });
     }
 
-    private void checkUserExistsAndLikePost(String postId, String userId, ListViewHolder holder) {
-        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<user>> call = apiInterface.getCurrentUser(userId, "*");
-        call.enqueue(new Callback<List<user>>() {
-            @Override
-            public void onResponse(Call<List<user>> call, Response<List<user>> response) {
-                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
-                    fetchAddLike(postId, userId, holder);
-                } else {
-                    Log.e("CheckUserExists", "User does not exist: " + userId);
-                }
-            }
+    private void showReportDialog() {
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_report, null);
+        RadioGroup radioGroupReport = dialogView.findViewById(R.id.radioGroupReport);
 
-            @Override
-            public void onFailure(Call<List<user>> call, Throwable throwable) {
-                Log.e("CheckUserExists", "API call failed: " + throwable.getMessage(), throwable);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Report Post");
+        builder.setView(dialogView);
+        builder.setPositiveButton("Submit", (dialog, which) -> {
+            // Handle the report submission
+            int selectedId = radioGroupReport.getCheckedRadioButtonId();
+            String reportType = "";
+            if(selectedId == R.id.radioSpam){
+                reportType= "Spam";
+            } else if (selectedId == R.id.radioInappropriate) {
+                reportType = "inapriorite";
+            }else if(selectedId == R.id.radioOther){
+                reportType= "Other";
             }
+            Log.d("ReportDialog", "Report type: " + reportType);
+            // Add code to handle report submission
         });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+        builder.create().show();
     }
 
     private void fetchAddLike(String postId, String userId, ListViewHolder holder) {
@@ -114,7 +134,9 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
                     Log.d("AddLikePost", "Like created successfully: " + response.body());
                     holder.isLiked = true;
-                    holder.btnLike.setImageResource(R.drawable.img_liked);
+                    holder.btnLike.setImageResource(R.drawable.like_vektor);
+                    int currentLikes = Integer.parseInt(holder.tvliked.getText().toString().split(" ")[0]);
+                    holder.tvliked.setText(String.valueOf(currentLikes + 1));
                 } else {
                     try {
                         Log.e("AddLikePost", "Failed to create LikePost: " + response.errorBody().string());
@@ -141,6 +163,8 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                     Log.d("DeleteLikePost", "Like created successfully: " + response.body());
                     holder.isLiked = false;
                     holder.btnLike.setImageResource(R.drawable.img_like);
+                    int currentLikes = Integer.parseInt(holder.tvliked.getText().toString().split(" ")[0]);
+                    holder.tvliked.setText(String.valueOf(currentLikes - 1));
                 } else {
                     try {
                         Log.e("DeleteLikePost", "Failed to create LikePost: " + response.errorBody().string());
@@ -170,7 +194,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                         holder.btnLike.setImageResource(R.drawable.img_like);
                     } else {
                         holder.isLiked = true;
-                        holder.btnLike.setImageResource(R.drawable.img_liked);
+                        holder.btnLike.setImageResource(R.drawable.like_vektor);
                     }
                 } else {
                     Log.e("FetchLikePost", "Failed to fetch like status: " + response.errorBody());
@@ -204,7 +228,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
     public class ListViewHolder extends RecyclerView.ViewHolder {
         public boolean isLiked = false;
         TextView tvname, tvcontent, tvtime, tvliked, tvcomment;
-        ImageButton btnComment, btnLike;
+        ImageButton btnComment, btnLike , btnOption;
         ImageView tvimg;
 
         public ListViewHolder(@NonNull View itemView) {
@@ -217,6 +241,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
             tvimg = itemView.findViewById(R.id.user_profile_image1);
             btnComment = itemView.findViewById(R.id.comment);
             btnLike = itemView.findViewById(R.id.like);
+            btnOption = itemView.findViewById(R.id.options);
         }
     }
 }

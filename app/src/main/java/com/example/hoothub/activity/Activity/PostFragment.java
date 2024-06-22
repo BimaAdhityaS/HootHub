@@ -58,7 +58,7 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         listPostAdapter = new ListPostAdapter(context, list, sp);
         rvText.setAdapter(listPostAdapter);
     }
-    private void fetchPosts() {
+    public void fetchPosts() {
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<post>> call = apiInterface.getPosts("created_at");
 

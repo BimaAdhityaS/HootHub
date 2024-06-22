@@ -3,7 +3,9 @@ package com.example.hoothub.retrofit;
 import android.database.Observable;
 
 import com.example.hoothub.model.comment;
+import com.example.hoothub.model.like_comment;
 import com.example.hoothub.model.like_post;
+import com.example.hoothub.model.like_reply;
 import com.example.hoothub.model.post;
 import com.example.hoothub.model.reply;
 import com.example.hoothub.model.user;
@@ -153,5 +155,40 @@ public interface ApiInterface {
             @Query("user_id") String user_id,
             @Query("post_id") String post_id
     );
-
+    @GET("Like_Comment")
+    Call<List<like_comment>> getLikeComment(
+            @Query("user_id") String user_id,
+            @Query("comment_id") String comment_id,
+            @Query("select") String select
+    );
+    @FormUrlEncoded
+    @POST("Like_Comment")
+    Call<List<like_comment>> createLikeComment(
+            @Field("user_id") String user_id,
+            @Field("comment_id") String comment_ic,
+            @Header("Prefer") String preferHeader
+    );
+    @DELETE("Like_Comment")
+    Call<List<like_comment>> deleteLikeComment(
+            @Query("user_id") String user_id,
+            @Query("comment_id") String comment_id
+    );
+    @GET("Like_Reply")
+    Call<List<like_reply>> getLikeReply(
+            @Query("user_id") String user_id,
+            @Query("reply_id") String reply_id,
+            @Query("select") String select
+    );
+    @FormUrlEncoded
+    @POST("Like_Reply")
+    Call<List<like_reply>> createLikeReply(
+            @Field("user_id") String user_id,
+            @Field("reply_id") String reply_id,
+            @Header("Prefer") String preferHeader
+    );
+    @DELETE("Like_Reply")
+    Call<List<like_reply>> deleteLikeReply(
+            @Query("user_id") String user_id,
+            @Query("reply_id") String reply_id
+    );
 }

@@ -2,6 +2,7 @@ package com.example.hoothub.activity.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,7 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
     private ArrayList<reply> list = new ArrayList<>();
     private ListReplyAdapter listReplyAdapter;
     private RecyclerView rvReply;
+    private SharedPreferences sp;
     public ReplyFragment() {
         // Required empty public constructor
     }
@@ -71,6 +73,7 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reply, container, false);
+        sp = getActivity().getSharedPreferences("userCred", Context.MODE_PRIVATE);
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
         tvTitle = view.findViewById(R.id.et_content);
         tvUsername = view.findViewById(R.id.et_username_1);
@@ -96,7 +99,7 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
     }
     private void showRecylcerList(Context context) {
         rvReply.setLayoutManager(new LinearLayoutManager(context));
-        listReplyAdapter = new ListReplyAdapter(context, list);
+        listReplyAdapter = new ListReplyAdapter(context, list, sp);
         rvReply.setAdapter(listReplyAdapter);
     }
     private void fetchReply() {

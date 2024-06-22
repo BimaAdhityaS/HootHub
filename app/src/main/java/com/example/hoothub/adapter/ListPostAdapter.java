@@ -122,6 +122,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Report Post");
         builder.setView(dialogView);
+
         builder.setPositiveButton("Submit", (dialog, which) -> {
             // Handle the report submission
             int selectedId = radioGroupReport.getCheckedRadioButtonId();

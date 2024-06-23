@@ -15,16 +15,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hoothub.R;
 import com.example.hoothub.adapter.ListCommentAdapter;
 import com.example.hoothub.adapter.ListReplyAdapter;
 import com.example.hoothub.model.comment;
 import com.example.hoothub.model.post;
 import com.example.hoothub.model.reply;
+import com.example.hoothub.model.user;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,6 +49,7 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
     private ListReplyAdapter listReplyAdapter;
     private RecyclerView rvReply;
     private SharedPreferences sp;
+    private ImageView tvImageUser;
     public ReplyFragment() {
         // Required empty public constructor
     }
@@ -82,6 +86,7 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
         tvReplyCount = view.findViewById(R.id.reply_count);
         rvReply = view.findViewById(R.id.rvReply);
         floatingActionButton.setOnClickListener(this);
+        tvImageUser = view.findViewById(R.id.reply_profile_image);
         return view;
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -138,6 +143,7 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
                     tvUsername.setText(comment.getUsername());
                     tvUsername_2.setText("@"+comment.getUsername());
                     tvReplyCount.setText(comment.getReply_count());
+                    getCurrentUser(comment.getUser_id());
                 } else {
                     Log.e("ReplyFragment", "Failed to fetch comment");
                 }
@@ -146,6 +152,38 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onFailure(Call<List<comment>> call, Throwable throwable) {
                 Log.e("ReplyFragment", "Error fetching comment: " + throwable.getMessage());
+            }
+        });
+    }
+    private void getCurrentUser(String user_id) {
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<user>> call = apiInterface.getCurrentUser(
+                "eq."+user_id,
+                "*"
+        );
+
+        call.enqueue(new Callback<List<user>>() {
+            @Override
+            public void onResponse(Call<List<user>> call, Response<List<user>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    user user_data = response.body().get(0); // Get the first user
+                    Log.d("Profile", "Current User Profile: " + response.body());
+                    Log.d("Profile", "User ID: " + user_data.getId());
+                    Glide.with(getContext())
+                            .load(user_data.getImg_profile())
+                            .placeholder(R.drawable.img_dummyprofilepic) // optional placeholder image
+                            .error(R.drawable.dummy_image) // optional error image
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(tvImageUser);
+                } else {
+                    Log.e("Profile", "Failed to fetch user data: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<user>> call, Throwable t) {
+                Log.e("Profile", "API call failed: " + t.getMessage(), t);
             }
         });
     }

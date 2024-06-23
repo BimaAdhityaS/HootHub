@@ -8,6 +8,7 @@ import com.example.hoothub.model.like_post;
 import com.example.hoothub.model.like_reply;
 import com.example.hoothub.model.post;
 import com.example.hoothub.model.reply;
+import com.example.hoothub.model.report;
 import com.example.hoothub.model.user;
 
 import java.util.List;
@@ -230,5 +231,29 @@ public interface ApiInterface {
     Call<List<like_reply>> deleteLikeReply(
             @Query("user_id") String user_id,
             @Query("reply_id") String reply_id
+    );
+    @FormUrlEncoded
+    @POST("Report")
+    Call<List<report>> createPostReport(
+            @Field("user_id") String user_id,
+            @Field("post_id") String post_id,
+            @Field("reason") String reason,
+            @Header("Prefer") String preferHeader
+    );
+    @FormUrlEncoded
+    @POST("Report")
+    Call<List<report>> createCommentReport(
+            @Field("user_id") String user_id,
+            @Field("comment_id") String comment_id,
+            @Field("reason") String reason,
+            @Header("Prefer") String preferHeader
+    );
+    @FormUrlEncoded
+    @POST("Report")
+    Call<List<report>> createReplyReport(
+            @Field("user_id") String user_id,
+            @Field("reply_id") String reply_id,
+            @Field("reason") String reason,
+            @Header("Prefer") String preferHeader
     );
 }

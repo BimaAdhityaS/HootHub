@@ -24,6 +24,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hoothub.R;
 import com.example.hoothub.activity.Activity.AddPostActivity;
 import com.example.hoothub.activity.Activity.CommentFragment;
@@ -31,6 +33,8 @@ import com.example.hoothub.activity.Activity.OtherProfileFragment;
 import com.example.hoothub.activity.Activity.PostFragment;
 import com.example.hoothub.model.like_post;
 import com.example.hoothub.model.post;
+import com.example.hoothub.model.report;
+import com.example.hoothub.model.user;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
 
@@ -67,7 +71,8 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         post currentPost = postList.get(position);
         String userId = sp.getString("user_id", null);
-        holder.tvimg.setImageResource(R.drawable.dummy_image);
+
+        getCurrentUser(currentPost.getUser_id(), holder);
 
         holder.tvname.setText(currentPost.getUser_name());
         holder.tvcontent.setText(currentPost.getContent());
@@ -113,7 +118,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                     popupMenu.setOnMenuItemClickListener(item -> {
                         if (item.getItemId() == R.id.report) {
                             Log.d("PopupMenu", "Edit clicked");
-                            showReportDialog();
+                            showReportDialog(currentPost.getId(), currentPost.getUser_id());
                         }
                         return false;
                     });
@@ -132,8 +137,40 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                 popupMenu.show();
             });
     }
+    public void getCurrentUser(String user_id, ListViewHolder holder){
 
-    private void showReportDialog() {
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<user>> call = apiInterface.getCurrentUser(
+                "eq."+user_id,
+                "*"
+        );
+
+        call.enqueue(new Callback<List<user>>() {
+            @Override
+            public void onResponse(Call<List<user>> call, Response<List<user>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    user user_data = response.body().get(0); // Get the first user
+                    Log.d("Profile", "Current User Profile: " + response.body());
+                    Log.d("Profile", "User ID: " + user_data.getId());
+                    Glide.with(holder.itemView.getContext())
+                            .load(user_data.getImg_profile())
+                            .placeholder(R.drawable.img_dummyprofilepic) // optional placeholder image
+                            .error(R.drawable.dummy_image) // optional error image
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(holder.tvimg);
+                } else {
+                    Log.e("Profile", "Failed to fetch user data: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<user>> call, Throwable t) {
+                Log.e("Profile", "API call failed: " + t.getMessage(), t);
+            }
+        });
+    }
+    private void showReportDialog(String postId, String userId) {
         View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_report, null);
         RadioGroup radioGroupReport = dialogView.findViewById(R.id.radioGroupReport);
         EditText etDescription = dialogView.findViewById(R.id.etDescription);
@@ -152,7 +189,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
             }
         });
 
-        AlertDialog.Builder builder = getBuilder(dialogView, radioGroupReport, etDescription);
+        AlertDialog.Builder builder = getBuilder(dialogView, radioGroupReport, etDescription, postId, userId);
         AlertDialog dialog = builder.create();
         dialog.setOnShowListener(dialogInterface -> {
             dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -161,7 +198,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
     }
 
     @NonNull
-    private AlertDialog.Builder getBuilder(View dialogView, RadioGroup radioGroupReport, EditText etDescription) {
+    private AlertDialog.Builder getBuilder(View dialogView, RadioGroup radioGroupReport, EditText etDescription, String postId, String userId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Report Post");
         builder.setView(dialogView);
@@ -174,10 +211,39 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
             String description = etDescription.getText().toString();
             Log.d("ReportDialog", "Report type: " + reportType);
             Log.d("ReportDialog", "Description: " + description);
+            if(reportType == "Other") {
+                fetchReportPost(description, postId, userId);
+            }else{
+                fetchReportPost(reportType, postId, userId);
+            }
             // Add code to handle report submission
         });
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
         return builder;
+    }
+
+    private void fetchReportPost(String reason, String postId, String userId) {
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<report>> call = apiInterface.createPostReport(
+                userId, postId, reason, "return=representation"
+        );
+        call.enqueue(new Callback<List<report>>() {
+            @Override
+            public void onResponse(Call<List<report>> call, Response<List<report>> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "SuccessFully Report", Toast.LENGTH_LONG).show();
+                    Log.d("response", String.valueOf(response));
+                }else{
+                    Toast.makeText(context, "UnSuccessFully Report", Toast.LENGTH_SHORT).show();
+                    Log.d("response", String.valueOf(response));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<report>> call, Throwable throwable) {
+                Log.e("ReportPost", "API call failed: " + throwable.getMessage(), throwable);
+            }
+        });
     }
 
     @NonNull

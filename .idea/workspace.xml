@@ -112,20 +112,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c935f1-1804-4655-9355-7669cde8d071" name="Changes" comment="update other profile">
+    <list default="true" id="40c935f1-1804-4655-9355-7669cde8d071" name="Changes" comment="update tpi lupa dah sampe mana">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/model/report.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddCommentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddCommentActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddPostActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddPostActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddReplyActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddReplyActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/CommentFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/CommentFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/ReplyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/ReplyFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListCommentAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListCommentAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListPostAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListPostAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListReplyAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListReplyAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/retrofit/ApiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/retrofit/ApiInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_report.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_report.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_reply.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_reply.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,9 +179,9 @@
       <list>
         <option value="Interface" />
         <option value="layoutResourceFile_vertical" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -407,7 +402,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719057984277</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="update tpi lupa dah sampe mana">
+      <option name="closed" value="true" />
+      <created>1719131451481</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1719131451482</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -432,6 +435,7 @@
     <MESSAGE value="update report,edit,delete post and profile view" />
     <MESSAGE value="update pull" />
     <MESSAGE value="update other profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="update other profile" />
+    <MESSAGE value="update tpi lupa dah sampe mana" />
+    <option name="LAST_COMMIT_MESSAGE" value="update tpi lupa dah sampe mana" />
   </component>
 </project>

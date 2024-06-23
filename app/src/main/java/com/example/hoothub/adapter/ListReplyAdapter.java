@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +27,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hoothub.R;
 import com.example.hoothub.activity.Activity.AddReplyActivity;
+import com.example.hoothub.activity.Activity.MainActivity;
+import com.example.hoothub.activity.Activity.OtherProfileFragment;
 import com.example.hoothub.activity.Activity.ReplyFragment;
 import com.example.hoothub.model.like_reply;
+import com.example.hoothub.model.post;
 import com.example.hoothub.model.reply;
 import com.example.hoothub.model.report;
 import com.example.hoothub.model.user;
@@ -66,6 +70,7 @@ public class ListReplyAdapter extends RecyclerView.Adapter<ListReplyAdapter.List
     @Override
     public void onBindViewHolder(@NonNull ListReplyAdapter.ListViewHolder holder, int position) {
         reply currentReply = replylist.get(position);
+
         String userId = sp.getString("user_id", null);
         fetchLikeReply(currentReply.getId(), userId, holder);
         getCurrentUser(currentReply.getUser_id(), holder);
@@ -78,6 +83,24 @@ public class ListReplyAdapter extends RecyclerView.Adapter<ListReplyAdapter.List
         holder.tvliked.setText(currentReply.getLike_count());
         String formattedDate = formatDate(currentReply.getCreated_at());
         holder.tvtime.setText(formattedDate);
+
+        holder.tvimg.setOnClickListener(view -> {
+            String postUserId = currentReply.getUser_id();
+            if (userId != null && userId.equals(postUserId)) {
+                ((MainActivity) context).navigateToProfileFragment(true);
+            } else {
+                Fragment otherProfileFragment = new OtherProfileFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("user_id", postUserId); // Pass user ID to the fragment
+                otherProfileFragment.setArguments(bundle);
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) context)
+                        .getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, otherProfileFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
         holder.btnLike.setOnClickListener(view -> {
             if (holder.isLiked) {
                 fetchDeleteLike(currentReply.getId(), userId, holder);

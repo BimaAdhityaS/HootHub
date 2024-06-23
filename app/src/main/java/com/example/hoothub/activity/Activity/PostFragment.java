@@ -52,26 +52,22 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 
         fetchPosts("");
 
-        // Setup SearchView
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // Handle query submission if needed
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // Implement real-time search here
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         fetchPosts(newText);
                     }
-                }, 300); // Delay in milliseconds before performing the search
-
+                }, 300);
                 return true;
             }
         });
@@ -91,10 +87,8 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<post>> call;
         if (username.isEmpty()) {
-            // Fetch all posts if username is empty
             call = apiInterface.getPosts("created_at.desc");
         } else {
-            // Fetch posts filtered by username
             call = apiInterface.searchPosts("ilike.*" + username, "created_at.desc");
         }
 

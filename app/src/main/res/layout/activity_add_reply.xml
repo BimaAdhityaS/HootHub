@@ -15,6 +15,7 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/white"
         android:text="Cancel"
+        android:textSize="16sp"
         android:textColor="@color/blueButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +27,7 @@
         android:layout_marginTop="28dp"
         android:gravity="center"
         android:text="Your Reply"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/btn_post_reply"
@@ -41,6 +43,7 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/blueButton"
         android:text="Post"
+        android:textSize="16sp"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

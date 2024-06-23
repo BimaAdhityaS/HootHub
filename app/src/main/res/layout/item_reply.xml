@@ -28,6 +28,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:text="@string/name"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/user_profile_image1"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/black"

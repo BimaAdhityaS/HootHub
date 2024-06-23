@@ -40,7 +40,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
     private static final String ARG_POST_ID = "post_id";
     private int postId;
 
-    private TextView tvTitle, tvUsername, tvUsername_2, tvCommentCount;
+    private TextView tvTitle, tvUsername, tvUsername_2, tvCommentCount, tvLikeCount;
     private RecyclerView rvComment;
     private FloatingActionButton floatingActionButton;
     private ArrayList<comment> list = new ArrayList<>();
@@ -80,6 +80,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
         tvUsername_2 = view.findViewById(R.id.et_username_2);
         rvComment = view.findViewById(R.id.rvComment);  // Inisialisasi RecyclerView
         tvCommentCount = view.findViewById(R.id.comments_count);
+        tvLikeCount = view.findViewById(R.id.comment_likes_count);
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(this);
         return view;
@@ -139,6 +140,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
                     tvUsername.setText(post.getUser_name());
                     tvUsername_2.setText("@"+post.getUser_name());
                     tvCommentCount.setText(post.getComment_count());
+                    tvLikeCount.setText(post.getLike_count());
                     getCurrentUser(post.getUser_id());
                 } else {
                     Log.e("CommentFragment", "Failed to fetch post");

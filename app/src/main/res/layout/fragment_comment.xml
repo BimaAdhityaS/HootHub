@@ -133,7 +133,7 @@
                     <!-- Jumlah Like -->
                     <!-- Text nanti diganti dengan jumlah value dari DB-->
                     <TextView
-                        android:id="@+id/likes"
+                        android:id="@+id/comment_likes_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/plus_jakarta_sans"

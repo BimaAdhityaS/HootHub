@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     editor.putString("username", login_data.getUsername());
                     editor.apply();
 
+                    Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
                     // Intent to start RegisterActivity
                     Intent intent;
                     intent = new Intent(LoginActivity.this, MainActivity.class);

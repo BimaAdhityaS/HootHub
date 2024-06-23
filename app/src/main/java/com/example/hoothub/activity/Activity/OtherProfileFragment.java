@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hoothub.R;
 import com.example.hoothub.adapter.ListPostAdapter;
 import com.example.hoothub.model.post;
@@ -30,6 +32,7 @@ import retrofit2.Response;
 
 public class OtherProfileFragment extends Fragment {
 
+    private de.hdodenhof.circleimageview.CircleImageView imgProfile;
     private TextView profileName, userName, bio;
     private SharedPreferences sp;
     private RecyclerView rvText;
@@ -40,6 +43,7 @@ public class OtherProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_other_profile, container, false);
 
+        imgProfile = view.findViewById(R.id.other_user_profile_image1);
         profileName = view.findViewById(R.id.other_name_profile);
         userName = view.findViewById(R.id.other_username_profile);
         bio = view.findViewById(R.id.other_bio_profile);
@@ -66,7 +70,21 @@ public class OtherProfileFragment extends Fragment {
             public void onResponse(Call<List<user>> call, Response<List<user>> response) {
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
                     user userData = response.body().get(0); // Get the first user
-                    profileName.setText(userData.getFirstName() + " " + userData.getLastName());
+
+                    Glide.with(OtherProfileFragment.this)
+                            .load(userData.getImg_profile())
+                            .placeholder(R.drawable.img_dummyprofilepic) // optional placeholder image
+                            .error(R.drawable.dummy_image) // optional error image
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(imgProfile);
+
+                    if (userData.getFirstName().isEmpty() || userData.getLastName().isEmpty()){
+                        profileName.setText("@" + userData.getUsername());
+                    }else {
+                        profileName.setText(userData.getFirstName() + " " + userData.getLastName());
+                    }
+
                     userName.setText("@" + userData.getUsername());
                     bio.setText(userData.getBio() != null ? userData.getBio() : "No bio available");
                     // Fetch posts for this user
@@ -91,7 +109,7 @@ public class OtherProfileFragment extends Fragment {
 
     private void fetchPosts(String userId) {
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<post>> call = apiInterface.getCurrentUserPost("eq." + userId, "*", "created_at");
+        Call<List<post>> call = apiInterface.getCurrentUserPost("eq." + userId, "*", "created_at.desc");
 
         call.enqueue(new Callback<List<post>>() {
             @Override

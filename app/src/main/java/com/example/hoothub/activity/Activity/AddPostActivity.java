@@ -12,8 +12,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hoothub.R;
 import com.example.hoothub.model.post;
+import com.example.hoothub.model.user;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
 
@@ -25,6 +28,7 @@ import retrofit2.Response;
 
 public class AddPostActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private de.hdodenhof.circleimageview.CircleImageView imgProfile;
     private Button btn_cancel, btn_post;
     private EditText et_post;
     SharedPreferences sp;
@@ -36,7 +40,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-
+        imgProfile = findViewById(R.id.addPost_profile_image);
         sp = getSharedPreferences("userCred", Context.MODE_PRIVATE);
 
         btn_cancel = findViewById(R.id.btn_cancel);
@@ -45,6 +49,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         btn_cancel.setOnClickListener(this);
         btn_post.setOnClickListener(this);
 
+        getCurrentUser();
         getWindow().setStatusBarColor(getResources().getColor(R.color.white));
     }
 
@@ -87,6 +92,41 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onFailure(Call<List<post>> call, Throwable t) {
                 Log.e("AddPost", "API call failed: " + t.getMessage(), t);
+            }
+        });
+    }
+
+    public void getCurrentUser(){
+        String user_id = sp.getString("user_id", "");
+
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<user>> call = apiInterface.getCurrentUser(
+                "eq."+user_id,
+                "*"
+        );
+
+        call.enqueue(new Callback<List<user>>() {
+            @Override
+            public void onResponse(Call<List<user>> call, Response<List<user>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    user user_data = response.body().get(0); // Get the first user
+                    Log.d("Profile", "Current User Profile: " + response.body());
+                    Log.d("Profile", "User ID: " + user_data.getId());
+                    Glide.with(AddPostActivity.this)
+                            .load(user_data.getImg_profile())
+                            .placeholder(R.drawable.img_dummyprofilepic) // optional placeholder image
+                            .error(R.drawable.dummy_image) // optional error image
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(imgProfile);
+                } else {
+                    Log.e("Profile", "Failed to fetch user data: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<user>> call, Throwable t) {
+                Log.e("Profile", "API call failed: " + t.getMessage(), t);
             }
         });
     }

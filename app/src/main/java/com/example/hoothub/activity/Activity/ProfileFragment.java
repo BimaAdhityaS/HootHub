@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hoothub.R;
 import com.example.hoothub.adapter.ListPostAdapter;
 import com.example.hoothub.model.post;
@@ -35,6 +37,8 @@ import retrofit2.Response;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Button editBtn,signOutBtn;
     private TextView profileName, userName, bio;
+
+    private de.hdodenhof.circleimageview.CircleImageView imgProfile;
 
     private FloatingActionButton floatingActionButton;
 
@@ -58,6 +62,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         rvText = view.findViewById(R.id.rvText);
         rvText.setHasFixedSize(true);
 
+        imgProfile = view.findViewById(R.id.user_profile_image1);
         profileName = view.findViewById(R.id.name_profile);
         userName = view.findViewById(R.id.username_profile);
         bio = view.findViewById(R.id.bio_profile);
@@ -125,6 +130,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         bio.setText(user_data.getBio());
                     }
 
+                    Glide.with(ProfileFragment.this)
+                            .load(user_data.getImg_profile())
+                            .placeholder(R.drawable.img_dummyprofilepic)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)// optional placeholder image
+                            .error(R.drawable.dummy_image) // optional error image
+                            .into(imgProfile);
+
                 } else {
                     Log.e("Profile", "Failed to fetch user data: " + response.errorBody());
                 }
@@ -150,7 +163,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         Call<List<post>> call = apiInterface.getCurrentUserPost(
                 "eq." + user_id,
                 "*",
-                "created_at"
+                "created_at.desc"
         );
 
         call.enqueue(new Callback<List<post>>() {

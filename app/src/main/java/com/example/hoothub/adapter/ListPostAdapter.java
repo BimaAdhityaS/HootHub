@@ -29,8 +29,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hoothub.R;
 import com.example.hoothub.activity.Activity.AddPostActivity;
 import com.example.hoothub.activity.Activity.CommentFragment;
+import com.example.hoothub.activity.Activity.MainActivity;
 import com.example.hoothub.activity.Activity.OtherProfileFragment;
 import com.example.hoothub.activity.Activity.PostFragment;
+import com.example.hoothub.activity.Activity.ProfileFragment;
 import com.example.hoothub.model.like_post;
 import com.example.hoothub.model.post;
 import com.example.hoothub.model.report;
@@ -53,11 +55,17 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
     private ArrayList<post> postList;
     private Context context;
     private SharedPreferences sp;
+    private OnProfileClickListener onProfileClickListener;
 
     public ListPostAdapter(Context context, ArrayList<post> list, SharedPreferences sp) {
         this.context = context;
         this.postList = list;
         this.sp = sp;
+        this.onProfileClickListener = onProfileClickListener;
+    }
+
+    public interface OnProfileClickListener {
+        void onProfileClick(String userId);
     }
 
     @NonNull
@@ -91,15 +99,20 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
         });
 
         holder.tvimg.setOnClickListener(view -> {
-            Fragment otherProfileFragment = new OtherProfileFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("user_id", currentPost.getUser_id()); // Pass user ID to the fragment
-            otherProfileFragment.setArguments(bundle);
-            FragmentTransaction fragmentTransaction = ((FragmentActivity) context)
-                    .getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout, otherProfileFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+            String postUserId = currentPost.getUser_id();
+            if (userId != null && userId.equals(postUserId)) {
+                ((MainActivity) context).navigateToProfileFragment(true);
+            } else {
+                Fragment otherProfileFragment = new OtherProfileFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("user_id", postUserId); // Pass user ID to the fragment
+                otherProfileFragment.setArguments(bundle);
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) context)
+                        .getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, otherProfileFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
         });
 
         holder.btnLike.setOnClickListener(view -> {

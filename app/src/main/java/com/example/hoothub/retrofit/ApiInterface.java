@@ -256,4 +256,10 @@ public interface ApiInterface {
             @Field("reason") String reason,
             @Header("Prefer") String preferHeader
     );
+
+    @GET("Hoothub_Post_1")
+    Call<List<post>> searchPosts(
+            @Query("username") String username,
+            @Query("order") String order
+    );
 }

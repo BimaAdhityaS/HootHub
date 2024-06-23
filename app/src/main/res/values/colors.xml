@@ -11,4 +11,5 @@
     <color name="lightBorder">#33A0A0A0</color>
     <color name="blue">#0000FF</color>
     <color name="brightRed">#FF0000</color>
+    <color name="gray">#808080</color>
 </resources>

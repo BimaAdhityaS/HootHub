@@ -39,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
         // Load default fragment
         Intent intent = getIntent();
         if (savedInstanceState == null) {
-            Log.d("homeFragment1",String.valueOf(intent));
+            Log.d("homeFragment1", String.valueOf(intent));
             loadFragment(new PostFragment(), false);
         }
-        if (intent != null && intent.hasExtra("post_id")){
-            Log.d("homeFragment2",String.valueOf(intent));
+        if (intent != null && intent.hasExtra("post_id")) {
+            Log.d("homeFragment2", String.valueOf(intent));
             String post_id = intent.getStringExtra("post_id");
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
-        if(intent != null && intent.hasExtra("comment_id")){
+        if (intent != null && intent.hasExtra("comment_id")) {
             String comment_id = intent.getStringExtra("comment_id");
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -76,6 +76,14 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void navigateToProfileFragment(boolean isOwnProfile) {
+        if (isOwnProfile) {
+            bottomNavigationView.setSelectedItemId(R.id.profile);
+        } else {
+            loadFragment(new ProfileFragment(), false);
+        }
     }
 
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {

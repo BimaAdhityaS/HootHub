@@ -4,27 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.hoothub.R;
 import com.example.hoothub.adapter.ListPostAdapter;
-import com.example.hoothub.model.like_post;
 import com.example.hoothub.model.post;
 import com.example.hoothub.retrofit.ApiInterface;
 import com.example.hoothub.retrofit.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.appcompat.widget.SearchView;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,9 +32,12 @@ public class PostFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView rvText;
     private ArrayList<post> list = new ArrayList<>();
-    private FloatingActionButton floatingActionButton;
     private ListPostAdapter listPostAdapter;
-    SharedPreferences sp;
+    private FloatingActionButton floatingActionButton;
+    private SharedPreferences sp;
+    private SearchView searchView;
+    private Handler handler;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,21 +48,55 @@ public class PostFragment extends Fragment implements View.OnClickListener {
         sp = getActivity().getSharedPreferences("userCred", Context.MODE_PRIVATE);
         floatingActionButton.setOnClickListener(this);
 
-        // Initialize the adapter and RecyclerView
-        showRecylcerList(view.getContext());
-        // Fetch posts from the API
-        fetchPosts();
+        showRecyclerList(view.getContext());
+
+        fetchPosts("");
+
+        // Setup SearchView
+        searchView = view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Handle query submission if needed
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Implement real-time search here
+                handler.removeCallbacksAndMessages(null);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        fetchPosts(newText);
+                    }
+                }, 300); // Delay in milliseconds before performing the search
+
+                return true;
+            }
+        });
+
+        handler = new Handler();
 
         return view;
     }
-    private void showRecylcerList(Context context) {
+
+    private void showRecyclerList(Context context) {
         rvText.setLayoutManager(new LinearLayoutManager(context));
         listPostAdapter = new ListPostAdapter(context, list, sp);
         rvText.setAdapter(listPostAdapter);
     }
-    public void fetchPosts() {
+
+    private void fetchPosts(String username) {
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-        Call<List<post>> call = apiInterface.getPosts("created_at.desc");
+        Call<List<post>> call;
+        if (username.isEmpty()) {
+            // Fetch all posts if username is empty
+            call = apiInterface.getPosts("created_at.desc");
+        } else {
+            // Fetch posts filtered by username
+            call = apiInterface.searchPosts("ilike.*" + username, "created_at.desc");
+        }
 
         call.enqueue(new Callback<List<post>>() {
             @Override

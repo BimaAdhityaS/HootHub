@@ -2,12 +2,15 @@ package com.example.hoothub.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -22,8 +25,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hoothub.R;
+import com.example.hoothub.activity.Activity.AddPostActivity;
 import com.example.hoothub.activity.Activity.CommentFragment;
 import com.example.hoothub.activity.Activity.OtherProfileFragment;
+import com.example.hoothub.activity.Activity.PostFragment;
 import com.example.hoothub.model.like_post;
 import com.example.hoothub.model.post;
 import com.example.hoothub.retrofit.ApiInterface;
@@ -116,9 +121,10 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
                     popupMenu.inflate(R.menu.popup_edit_delete_menu);
                     popupMenu.setOnMenuItemClickListener(item -> {
                         if(item.getItemId() == R.id.edit_content){
-                            Toast.makeText(context, "You Edit this Content",Toast.LENGTH_SHORT).show();
+                            fetchEditPostById(currentPost.getId(), currentPost.getContent());
                         } else if (item.getItemId() == R.id.delete_content) {
-                            Toast.makeText(context, "You Delete this Content",Toast.LENGTH_SHORT).show();
+                            fetchDeletePostById(currentPost.getId(), userId);
+
                         }
                         return false;
                     });
@@ -130,29 +136,101 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ListVi
     private void showReportDialog() {
         View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_report, null);
         RadioGroup radioGroupReport = dialogView.findViewById(R.id.radioGroupReport);
+        EditText etDescription = dialogView.findViewById(R.id.etDescription);
+        TextView tvDescription = dialogView.findViewById(R.id.tvDescription);
 
+        radioGroupReport.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.radioOther) {
+                    tvDescription.setVisibility(View.VISIBLE);
+                    etDescription.setVisibility(View.VISIBLE);
+                } else {
+                    tvDescription.setVisibility(View.GONE);
+                    etDescription.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        AlertDialog.Builder builder = getBuilder(dialogView, radioGroupReport, etDescription);
+        AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(dialogInterface -> {
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        });
+        builder.create().show();
+    }
+
+    @NonNull
+    private AlertDialog.Builder getBuilder(View dialogView, RadioGroup radioGroupReport, EditText etDescription) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Report Post");
         builder.setView(dialogView);
 
+
         builder.setPositiveButton("Submit", (dialog, which) -> {
             // Handle the report submission
             int selectedId = radioGroupReport.getCheckedRadioButtonId();
-            String reportType = "";
-            if(selectedId == R.id.radioSpam){
-                reportType= "Spam";
-            } else if (selectedId == R.id.radioInappropriate) {
-                reportType = "inapriorite";
-            }else if(selectedId == R.id.radioOther){
-                reportType= "Other";
-            }
+            String reportType = getString(selectedId);
+            String description = etDescription.getText().toString();
             Log.d("ReportDialog", "Report type: " + reportType);
+            Log.d("ReportDialog", "Description: " + description);
             // Add code to handle report submission
         });
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
-        builder.create().show();
+        return builder;
     }
 
+    @NonNull
+    private static String getString(int selectedId) {
+        String reportType = "";
+        if (selectedId == R.id.radioAbusive) {
+            reportType = "Abusive or rude behaviour";
+        } else if (selectedId == R.id.radioFraud) {
+            reportType = "Possible Fraud";
+        } else if (selectedId == R.id.radioPrivacy) {
+            reportType = "Privacy Violation";
+        } else if (selectedId == R.id.radioSpam) {
+            reportType = "Spam";
+        } else if (selectedId == R.id.radioOther) {
+            reportType = "Other";
+        }
+        return reportType;
+    }
+
+    private void fetchEditPostById(String postId, String content){
+            Intent intent = new Intent(context, AddPostActivity.class);
+            intent.putExtra("POST_ID", postId);
+            intent.putExtra("POST_CONTENT", content);
+            context.startActivity(intent);
+    }
+
+    private  void fetchDeletePostById(String postId, String userId){
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<post>> call = apiInterface.deletContentPost(
+                "eq." + postId, "eq." + userId
+        );
+        call.enqueue(new Callback<List<post>>() {
+            @Override
+            public void onResponse(Call<List<post>> call, Response<List<post>> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Delete SuccessFully", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context, "Delete UnSuccessFully", Toast.LENGTH_SHORT).show();
+                }
+
+                FragmentTransaction fragmentTransaction = ((FragmentActivity) context)
+                        .getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, new PostFragment());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+
+            @Override
+            public void onFailure(Call<List<post>> call, Throwable throwable) {
+                Log.e("DeleteContentPost", "API call failed: " + throwable.getMessage(), throwable);
+            }
+        });
+    }
     private void fetchAddLike(String postId, String userId, ListViewHolder holder) {
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<like_post>> call = apiInterface.createLikePost(userId, postId,"return=representation");

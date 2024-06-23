@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -35,8 +37,29 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Load default fragment
+        Intent intent = getIntent();
         if (savedInstanceState == null) {
+            Log.d("homeFragment1",String.valueOf(intent));
             loadFragment(new PostFragment(), false);
+        }
+        if (intent != null && intent.hasExtra("post_id")){
+            Log.d("homeFragment2",String.valueOf(intent));
+            String post_id = intent.getStringExtra("post_id");
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            CommentFragment commentFragment = CommentFragment.newInstance(Integer.parseInt(post_id));
+            fragmentTransaction.replace(R.id.frame_layout, commentFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+        if(intent != null && intent.hasExtra("comment_id")){
+            String comment_id = intent.getStringExtra("comment_id");
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            ReplyFragment replyFragment = ReplyFragment.newInstance(Integer.parseInt(comment_id));
+            fragmentTransaction.replace(R.id.frame_layout, replyFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -58,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
     private void loadFragment(Fragment fragment, boolean isAppInitialized) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
         if (isAppInitialized) {
             fragmentTransaction.add(R.id.frame_layout, fragment);
         } else {

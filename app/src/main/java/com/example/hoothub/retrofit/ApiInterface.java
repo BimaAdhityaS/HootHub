@@ -98,7 +98,18 @@ public interface ApiInterface {
             @Query("id") String id,
             @Query("select") String select
     );
-
+    @DELETE("Hoothub_Post_1")
+    Call<List<post>> deletContentPost(
+            @Query("id") String id,
+            @Query("user_id") String user_id
+    );
+    @FormUrlEncoded
+    @PATCH("Hoothub_Post_1")
+    Call<List<post>> updateContentPost(
+            @Query("id") String id,
+            @Field("content") String content,
+            @Header("Prefer") String preferHeader
+    );
     @FormUrlEncoded
     @POST("Hoothub_Comment_2")
     Call<List<comment>> createComment(
@@ -120,7 +131,18 @@ public interface ApiInterface {
             @Query("id") String id,
             @Query("select") String select
     );
-
+    @DELETE("Hoothub_Comment_2")
+    Call<List<comment>> deleteContentComment(
+            @Query("id") String id,
+            @Query("user_id") String user_id
+    );
+    @FormUrlEncoded
+    @PATCH("Hoothub_Comment_2")
+    Call<List<comment>> updateContentComment(
+      @Query("id") String id,
+      @Field("content") String content,
+      @Header("Prefer") String preferHeader
+    );
     @FormUrlEncoded
     @POST("Hoothub_Reply_3")
     Call<List<reply>> createReply(
@@ -130,12 +152,23 @@ public interface ApiInterface {
             @Field("content") String content,
             @Header("Prefer") String preferHeader
     );
-
     @GET("Hoothub_Reply_3")
     Call<List<reply>> getReply(
             @Query("comment_id") String comment_id,
             @Query("select") String select,
             @Query("order") String order
+    );
+    @DELETE("Hoothub_Reply_3")
+    Call<List<reply>> deleteContentReply(
+            @Query("id") String id,
+            @Query("user_id") String user_id
+    );
+    @FormUrlEncoded
+    @PATCH("Hoothub_Reply_3")
+    Call<List<reply>> updateContentReply(
+            @Query("id") String id,
+            @Field("content") String content,
+            @Header("Prefer") String preferHeader
     );
     @GET("Like_Post")
     Call<List<like_post>> getLikePost(

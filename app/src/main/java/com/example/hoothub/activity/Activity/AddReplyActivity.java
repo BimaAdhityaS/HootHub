@@ -29,7 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddReplyActivity extends AppCompatActivity implements View.OnClickListener{
-    private String comment_id;
+    private String comment_id, reply_id, reply_content;
     private Button btn_cancel_reply, btn_post_reply;
     private EditText et_reply;
     SharedPreferences sp;
@@ -45,11 +45,18 @@ public class AddReplyActivity extends AppCompatActivity implements View.OnClickL
         if(intent != null && intent.hasExtra("comment_id")){
             comment_id = intent.getStringExtra("comment_id");
             Log.d("AddReplyActivity", "Received comment: " + comment_id);
+            if(intent.hasExtra("reply_content") && intent.hasExtra("reply_id")){
+                reply_content = intent.getStringExtra("reply_content");
+                reply_id = intent.getStringExtra("reply_id");
+            }
         }
         sp = getSharedPreferences("userCred", Context.MODE_PRIVATE);
         btn_cancel_reply = findViewById(R.id.btn_cancel_reply);
         btn_post_reply = findViewById(R.id.btn_post_reply);
         et_reply = findViewById(R.id.et_reply);
+        if(reply_content != null && !reply_content.isEmpty()){
+            et_reply.setText(reply_content);
+        }
         btn_cancel_reply.setOnClickListener(this);
         btn_post_reply.setOnClickListener(this);
 
@@ -59,16 +66,49 @@ public class AddReplyActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.btn_cancel_reply){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(AddReplyActivity.this, MainActivity.class);
+            intent.putExtra("comment_id", comment_id);
             startActivity(intent);
         } else if (view.getId() == R.id.btn_post_reply) {
             String content = et_reply.getText().toString();
             if(content.isEmpty()){
                 Toast.makeText(AddReplyActivity.this,"Please Fill Your Content",Toast.LENGTH_SHORT).show();
-            }else{
+            } else if (!reply_id.isEmpty() && !reply_content.isEmpty() && reply_content != null && reply_id != null) {
+                btnEditContentClicked();
+            } else{
                 btnCreateContentClicked();
             }
         }
+    }
+
+    private void btnEditContentClicked() {
+        String content = et_reply.getText().toString();
+        if(comment_id == null){
+            Log.e("EditReplyActivity", "Comment_id is null, cannot create reply");
+            Toast.makeText(this, "Error: Comment ID is null", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        Call<List<reply>> call = apiInterface.updateContentReply(
+                "eq." + reply_id, content, "return=representation"
+        );
+        call.enqueue(new Callback<List<reply>>() {
+            @Override
+            public void onResponse(Call<List<reply>> call, Response<List<reply>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()){
+                    Intent intent = new Intent(AddReplyActivity.this, MainActivity.class);
+                    intent.putExtra("comment_id", comment_id);
+                    startActivity(intent);
+                }else{
+                    Log.e("EditReply", "Failed to update reply: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<reply>> call, Throwable throwable) {
+                Log.e("Editreply", "API call failed: " + throwable.getMessage(), throwable);
+            }
+        });
     }
 
     private void btnCreateContentClicked() {
@@ -90,6 +130,7 @@ public class AddReplyActivity extends AppCompatActivity implements View.OnClickL
                 if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()){
                     Log.d("AddReply", "Content created successfully: " + response.body());
                     Intent intent = new Intent(AddReplyActivity.this, MainActivity.class);
+                    intent.putExtra("comment_id", comment_id);
                     startActivity(intent);
                 }else{
                     Log.e("AddReply", "Failed to create reply: " + response.errorBody());

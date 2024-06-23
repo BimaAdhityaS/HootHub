@@ -125,7 +125,9 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
         call.enqueue(new Callback<List<post>>() {
             @Override
             public void onResponse(Call<List<post>> call, Response<List<post>> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                Log.d("Response", String.valueOf(response.body()));
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+
                     post post = response.body().get(0);
                     tvTitle.setText(post.getContent());
                     tvUsername.setText(post.getUser_name());

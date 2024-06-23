@@ -27,6 +27,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
 
     private Button btn_cancel, btn_post;
     private EditText et_post;
+    private String postIdIntent = "",contentIntent = "";
     SharedPreferences sp;
 
     @Override
@@ -36,12 +37,20 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+        Intent intent = getIntent();
+        if (intent != null) {
+            postIdIntent = intent.getStringExtra("POST_ID");
+            contentIntent = intent.getStringExtra("POST_CONTENT");
+        }
 
         sp = getSharedPreferences("userCred", Context.MODE_PRIVATE);
 
         btn_cancel = findViewById(R.id.btn_cancel);
         btn_post = findViewById(R.id.btn_post);
         et_post = findViewById(R.id.et_post);
+        if(contentIntent != null && !contentIntent.isEmpty()){
+            et_post.setText(contentIntent);
+        }
         btn_cancel.setOnClickListener(this);
         btn_post.setOnClickListener(this);
 
@@ -58,9 +67,42 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
             if (content.isEmpty()) {
                 Toast.makeText(AddPostActivity.this, "Please fill your content", Toast.LENGTH_SHORT).show();
             } else {
-                btnCreateContentClicked();
+                if(postIdIntent.isEmpty() && contentIntent.isEmpty()){
+                    btnCreateContentClicked();
+                }
+                else {
+                    btnUpdateContentClicked();
+                }
             }
         }
+    }
+
+    private void btnUpdateContentClicked() {
+        String content = et_post.getText().toString();
+        ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
+        if(postIdIntent.isEmpty()){
+            Toast.makeText(this, "Cannot Edit this Post", Toast.LENGTH_SHORT).show();
+        }
+        Call<List<post>> call = apiInterface.updateContentPost(
+                "eq."+postIdIntent, content,"return=representation"
+        );
+        call.enqueue(new Callback<List<post>>() {
+            @Override
+            public void onResponse(Call<List<post>> call, Response<List<post>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()){
+                    Log.d("EditPost", "Content Updated successfully: " + response.body());
+                    Intent intent = new Intent(AddPostActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }else{
+                    Log.e("EditPost", "Failed to update post: " + response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<post>> call, Throwable throwable) {
+                Log.e("EditPost", "API call failed: " + throwable.getMessage(), throwable);
+            }
+        });
     }
 
     private void btnCreateContentClicked() {

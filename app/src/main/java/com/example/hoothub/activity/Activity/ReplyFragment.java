@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.hoothub.R;
 import com.example.hoothub.adapter.ListCommentAdapter;
 import com.example.hoothub.adapter.ListReplyAdapter;
@@ -105,7 +106,7 @@ public class ReplyFragment extends Fragment implements View.OnClickListener{
     private void fetchReply() {
         ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
         Call<List<reply>> call = apiInterface.getReply("eq." + mParam1, "*",
-                "created_at");
+                "created_at.desc");
         call.enqueue(new Callback<List<reply>>() {
             @Override
             public void onResponse(Call<List<reply>> call, Response<List<reply>> response) {

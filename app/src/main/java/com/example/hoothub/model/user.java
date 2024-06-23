@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 public class user {
     @SerializedName("id")
     private String id;
+
+    @SerializedName("img_profile")
+    private String img_profile;
     @SerializedName("first name")
     private String firstName;
     @SerializedName("last name")
@@ -26,6 +29,7 @@ public class user {
     public String toString() {
         return "user{" +
                 "id=" + id +
+                ", img_url='" + img_profile + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
@@ -37,8 +41,9 @@ public class user {
                 '}';
     }
 
-    public user(String id, String firstName, String lastName, String username, String bio, String email, String password, String createdAt, String modifiedAt) {
+    public user(String id, String img_url, String firstName, String lastName, String username, String bio, String email, String password, String createdAt, String modifiedAt) {
         this.id = id;
+        this.img_profile = img_url;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -59,6 +64,14 @@ public class user {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getImg_profile() {
+        return img_profile;
+    }
+
+    public void setImg_profile(String img_url) {
+        this.img_profile = img_url;
     }
 
     public void setFirstName(String firstName) {

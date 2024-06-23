@@ -34,7 +34,7 @@ public interface ApiInterface {
             @Field("password") String password,
             @Header("Prefer") String preferHeader);
 
-    //Create a User
+    //Update a User
     @FormUrlEncoded
     @PATCH("User")
     Call<List<user>> updateUser(
@@ -43,6 +43,13 @@ public interface ApiInterface {
             @Field("last name") String last_name,
             @Field("username") String username,
             @Field("bio") String bio);
+
+    //Update a User Img Profile
+    @FormUrlEncoded
+    @PATCH("User")
+    Call<List<user>> updateUserImgProfile(
+            @Query("id") String user_id,
+            @Field("img_profile") String img_profile);
 
     //GET Filtering User sebagai indikasi login (Kalau ada usernya berarti dia masuk)
     @GET("User")

@@ -98,7 +98,7 @@ public class CommentFragment extends Fragment implements View.OnClickListener{
         Call<List<comment>> call = apiInterface.getComment(
                 "eq." + postId,
                 "*",
-                "created_at"
+                "created_at.desc"
         );
         call.enqueue(new Callback<List<comment>>() {
             @Override

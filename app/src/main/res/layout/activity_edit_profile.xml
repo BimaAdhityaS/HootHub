@@ -29,9 +29,9 @@
         android:id="@+id/imgButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:src="@drawable/layer_drawable_circle"
-        android:onClick="onPlusButtonClick"
+        android:layout_centerInParent="true"
+        android:src="@drawable/img_uploadimageplaceholder"
+        android:onClick="openGallery"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

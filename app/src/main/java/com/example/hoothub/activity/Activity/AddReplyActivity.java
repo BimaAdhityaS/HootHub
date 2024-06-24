@@ -81,7 +81,7 @@ public class AddReplyActivity extends AppCompatActivity implements View.OnClickL
             String content = et_reply.getText().toString();
             if(content.isEmpty()){
                 Toast.makeText(AddReplyActivity.this,"Please Fill Your Content",Toast.LENGTH_SHORT).show();
-            } else if (!reply_id.isEmpty() && !reply_content.isEmpty() && reply_content != null && reply_id != null) {
+            } else if (reply_id != null && !reply_id.isEmpty() && reply_content != null && !reply_content.isEmpty()) {
                 btnEditContentClicked();
             } else{
                 btnCreateContentClicked();

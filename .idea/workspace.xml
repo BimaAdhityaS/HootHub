@@ -112,15 +112,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c935f1-1804-4655-9355-7669cde8d071" name="Changes" comment="update tpi lupa dah sampe mana">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/model/report.java" afterDir="false" />
+    <list default="true" id="40c935f1-1804-4655-9355-7669cde8d071" name="Changes" comment="fix/adapter and view: fix view and adapter for comment and reply">
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/CommentFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/CommentFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/ReplyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/ReplyFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListCommentAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListCommentAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListPostAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListPostAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListReplyAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/adapter/ListReplyAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/retrofit/ApiInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/retrofit/ApiInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddPostActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddPostActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddReplyActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddReplyActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_post.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +127,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\ACER\.android\avd\Pixel_2_API_30.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\bobby\.android\avd\Medium_Phone_API_28.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -179,9 +176,8 @@
       <list>
         <option value="Interface" />
         <option value="layoutResourceFile_vertical" />
-        <option value="layoutResourceFile" />
-        <option value="resourceFile" />
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -194,14 +190,12 @@
     &quot;assignee&quot;: &quot;BobbyRafael31&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="c7fa92e5-78a9-4fde-bdf5-f908529e4dc3" />
-        <option name="url" value="https://github.com/BimaAdhityaS/HootHub.git" />
-      </UrlAndAccount>
-    </option>
-  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/BimaAdhityaS/HootHub.git&quot;,
+    &quot;accountId&quot;: &quot;c7fa92e5-78a9-4fde-bdf5-f908529e4dc3&quot;
+  }
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -220,7 +214,6 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Android App.app.executor&quot;: &quot;Run&quot;,
-    &quot;ResourceManagerPrefKey.ResourceType&quot;: &quot;ANIM&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
@@ -234,6 +227,7 @@
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/ACER/OneDrive/Documents/Project2an/Belajar_flutter/coba_flutter/HootHub/app/src/main/res/drawable&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/ACER/OneDrive/Documents/Project2an/Belajar_flutter/coba_flutter/HootHub/app/src/main/res/drawable&quot;,
+    &quot;recommended.upgrade.do.not.ask.for.project&quot;: &quot;true&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;copyright&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
@@ -250,6 +244,9 @@
     </key>
     <key name="android.template.488900479">
       <recent name="com.example.hoothub.activity.Activity" />
+    </key>
+    <key name="android.template.-1882417083">
+      <recent name="com.example.hoothub" />
     </key>
   </component>
   <component name="RunManager">
@@ -268,7 +265,6 @@
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -370,47 +366,31 @@
       <option name="project" value="LOCAL" />
       <updated>1718606843554</updated>
     </task>
-    <task id="LOCAL-00006" summary="update reply api like and comment api like">
+    <task id="LOCAL-00006" summary="feat/other user profile">
       <option name="closed" value="true" />
-      <created>1719052799505</created>
+      <created>1719057669145</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1719052799505</updated>
+      <updated>1719057669145</updated>
     </task>
-    <task id="LOCAL-00007" summary="update report,edit,delete post and profile view">
+    <task id="LOCAL-00007" summary="fix&amp;feat/ fix own user profile view and search bar view">
       <option name="closed" value="true" />
-      <created>1719057120476</created>
+      <created>1719154105914</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1719057120477</updated>
+      <updated>1719154105914</updated>
     </task>
-    <task id="LOCAL-00008" summary="update pull">
+    <task id="LOCAL-00008" summary="fix/adapter and view: fix view and adapter for comment and reply">
       <option name="closed" value="true" />
-      <created>1719057752434</created>
+      <created>1719156491493</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1719057752434</updated>
+      <updated>1719156491493</updated>
     </task>
-    <task id="LOCAL-00009" summary="update other profile">
-      <option name="closed" value="true" />
-      <created>1719057984277</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1719057984277</updated>
-    </task>
-    <task id="LOCAL-00010" summary="update tpi lupa dah sampe mana">
-      <option name="closed" value="true" />
-      <created>1719131451481</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1719131451482</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -431,11 +411,9 @@
     <MESSAGE value="update post api" />
     <MESSAGE value="update comment api" />
     <MESSAGE value="update reply api" />
-    <MESSAGE value="update reply api like and comment api like" />
-    <MESSAGE value="update report,edit,delete post and profile view" />
-    <MESSAGE value="update pull" />
-    <MESSAGE value="update other profile" />
-    <MESSAGE value="update tpi lupa dah sampe mana" />
-    <option name="LAST_COMMIT_MESSAGE" value="update tpi lupa dah sampe mana" />
+    <MESSAGE value="feat/other user profile" />
+    <MESSAGE value="fix&amp;feat/ fix own user profile view and search bar view" />
+    <MESSAGE value="fix/adapter and view: fix view and adapter for comment and reply" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix/adapter and view: fix view and adapter for comment and reply" />
   </component>
 </project>

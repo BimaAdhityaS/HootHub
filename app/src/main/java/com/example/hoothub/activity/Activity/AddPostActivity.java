@@ -73,7 +73,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
             if (content.isEmpty()) {
                 Toast.makeText(AddPostActivity.this, "Please fill your content", Toast.LENGTH_SHORT).show();
             } else {
-                if(postIdIntent.isEmpty() && contentIntent.isEmpty()){
+                if ((postIdIntent == null || postIdIntent.isEmpty()) && (contentIntent == null || contentIntent.isEmpty())) {
                     btnCreateContentClicked();
                 }
                 else {

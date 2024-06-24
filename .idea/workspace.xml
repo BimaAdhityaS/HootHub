@@ -112,12 +112,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c935f1-1804-4655-9355-7669cde8d071" name="Changes" comment="fix/adapter and view: fix view and adapter for comment and reply">
-      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
+    <list default="true" id="40c935f1-1804-4655-9355-7669cde8d071" name="Changes" comment="fix/post &amp; replies: fixing null references of post and replies">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddPostActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddPostActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddReplyActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hoothub/activity/Activity/AddReplyActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_post.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -390,7 +387,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719156491493</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix/post &amp; replies: fixing null references of post and replies">
+      <option name="closed" value="true" />
+      <created>1719219253044</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1719219253044</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -414,6 +419,7 @@
     <MESSAGE value="feat/other user profile" />
     <MESSAGE value="fix&amp;feat/ fix own user profile view and search bar view" />
     <MESSAGE value="fix/adapter and view: fix view and adapter for comment and reply" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix/adapter and view: fix view and adapter for comment and reply" />
+    <MESSAGE value="fix/post &amp; replies: fixing null references of post and replies" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix/post &amp; replies: fixing null references of post and replies" />
   </component>
 </project>

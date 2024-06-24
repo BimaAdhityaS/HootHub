@@ -41,7 +41,6 @@ public class AddReplyActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_reply);
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();

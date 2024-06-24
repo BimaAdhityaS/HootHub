@@ -79,7 +79,7 @@ public class OtherProfileFragment extends Fragment {
                             .skipMemoryCache(true)
                             .into(imgProfile);
 
-                    if (userData.getFirstName().isEmpty() || userData.getLastName().isEmpty()){
+                    if (userData.getFirstName() == null || userData.getLastName() == null ){
                         profileName.setText("@" + userData.getUsername());
                     }else {
                         profileName.setText(userData.getFirstName() + " " + userData.getLastName());
